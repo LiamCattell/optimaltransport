@@ -10,6 +10,7 @@ class BaseTransform(object):
     """
     def __init__(self):
         self.is_fitted = False
+        self.sig0_ = None
         self.displacements_ = None
         self.transport_map_ = None
 
@@ -37,7 +38,6 @@ class BaseTransform(object):
         raise NotImplementedError
 
 
-    @staticmethod
     def apply_forward_map(self):
         """
         Placeholder for application of forward transport map.
@@ -46,7 +46,6 @@ class BaseTransform(object):
         raise NotImplementedError
 
 
-    @staticmethod
     def apply_inverse_map(self):
         """
         Placeholder for application of inverse transport map.

@@ -55,6 +55,9 @@ class RadonCDT(BaseTransform):
         # Input signals must be the same size
         assert_equal_shape(sig0, sig1, ['sig0', 'sig1'])
 
+        # Set reference signal
+        self.sig0_ = sig0
+
         # Radon transform of signals
         rad0 = radon(sig0, theta=self.theta, circle=False)
         rad1 = radon(sig1, theta=self.theta, circle=False)
@@ -91,14 +94,9 @@ class RadonCDT(BaseTransform):
         return rcdt
 
 
-    def inverse(self, sig0):
+    def inverse(self):
         """
         Inverse transform.
-
-        Parameters
-        ----------
-        sig0 : array, shape (height, width)
-            Reference signal.
 
         Returns
         -------
@@ -106,11 +104,10 @@ class RadonCDT(BaseTransform):
             Reconstructed signal sig1.
         """
         self._check_is_fitted()
-        return self.apply_inverse_map(self.transport_map_, sig0, self.theta)
+        return self.apply_inverse_map(self.transport_map_, self.sig0_)
 
 
-    @staticmethod
-    def apply_forward_map(transport_map, sig1, theta=np.arange(180)):
+    def apply_forward_map(self, transport_map, sig1):
         """
         Appy forward transport map.
 
@@ -133,16 +130,15 @@ class RadonCDT(BaseTransform):
                                     dtype=[np.float64, np.float32])
         sig1 = check_array(sig1, ndim=2, dtype=[np.float64, np.float32],
                            force_strictly_positive=True)
-        theta = check_array(theta, ndim=1)
 
         # Number of projections in transport map must match number of angles
-        if transport_map.shape[1] != theta.size:
+        if transport_map.shape[1] != self.theta.size:
             raise ValueError("Length of theta must equal number of "
                              "projections in transport map: {} vs "
-                             "{}".format(theta.size, transport_map.shape[1]))
+                             "{}".format(self.theta.size, transport_map.shape[1]))
 
         # Initialize Radon transforms
-        rad1 = radon(sig1, theta=theta, circle=False)
+        rad1 = radon(sig1, theta=self.theta, circle=False)
         rad0 = np.zeros_like(rad1)
 
         # Check transport map and Radon transforms are the same size
@@ -150,15 +146,16 @@ class RadonCDT(BaseTransform):
                            ['transport_map', 'Radon transform of sig0'])
 
         # Loop over angles
-        for i in range(theta.size):
+        cdt = CDT()
+        for i in range(self.theta.size):
             # Convert projection to PDF
             j1 = signal_to_pdf(rad1[:,i], epsilon=1e-8, total=1.)
 
             # Radon transform of sig0 comprised of inverse CDT of projections
-            rad0[:,i] = CDT.apply_forward_map(transport_map[:,i], j1)
+            rad0[:,i] = cdt.apply_forward_map(transport_map[:,i], j1)
 
         # Inverse Radon transform
-        sig0_recon = iradon(rad0, theta, circle=False, filter='ramp')
+        sig0_recon = iradon(rad0, self.theta, circle=False, filter='ramp')
 
         # Crop sig0_recon to match sig1
         sig0_recon = match_shape2d(sig1, sig0_recon)
@@ -166,8 +163,7 @@ class RadonCDT(BaseTransform):
         return sig0_recon
 
 
-    @staticmethod
-    def apply_inverse_map(transport_map, sig0, theta=np.arange(180)):
+    def apply_inverse_map(self, transport_map, sig0):
         """
         Appy inverse transport map.
 
@@ -177,8 +173,6 @@ class RadonCDT(BaseTransform):
             Forward transport map. Inverse is computed in this function.
         sig0 : array, shape (height, width)
             Reference signal.
-        theta : array (default=np.arange(180))
-            Radon transform projection angles.
 
         Returns
         -------
@@ -190,10 +184,9 @@ class RadonCDT(BaseTransform):
                                     dtype=[np.float64, np.float32])
         sig0 = check_array(sig0, ndim=2, dtype=[np.float64, np.float32],
                            force_strictly_positive=True)
-        theta = check_array(theta, ndim=1)
 
         # Initialize Radon transforms
-        rad0 = radon(sig0, theta=theta, circle=False)
+        rad0 = radon(sig0, theta=self.theta, circle=False)
         rad1 = np.zeros_like(rad0)
 
         # Check transport map and Radon transforms are the same size
@@ -201,15 +194,16 @@ class RadonCDT(BaseTransform):
                            ['transport_map', 'Radon transform of sig0'])
 
         # Loop over angles
-        for i in range(theta.size):
+        cdt = CDT()
+        for i in range(self.theta.size):
             # Convert projection to PDF
             j0 = signal_to_pdf(rad0[:,i], epsilon=1e-8, total=1.)
 
             # Radon transform of sig1 comprised of inverse CDT of projections
-            rad1[:,i] = CDT.apply_inverse_map(transport_map[:,i], j0)
+            rad1[:,i] = cdt.apply_inverse_map(transport_map[:,i], j0)
 
         # Inverse Radon transform
-        sig1_recon = iradon(rad1, theta, circle=False, filter='ramp')
+        sig1_recon = iradon(rad1, self.theta, circle=False, filter='ramp')
 
         # Crop sig1_recon to match sig0
         sig1_recon = match_shape2d(sig0, sig1_recon)

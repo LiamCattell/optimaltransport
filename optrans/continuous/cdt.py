@@ -47,6 +47,8 @@ class CDT(BaseTransform):
         # Input signals must be the same size
         assert_equal_shape(sig0, sig1, ['sig0', 'sig1'])
 
+        self.sig0_ = sig0
+
         # Cumulative sums
         cum0 = np.cumsum(sig0)
         cum1 = np.cumsum(sig1)
@@ -74,14 +76,9 @@ class CDT(BaseTransform):
         return cdt
 
 
-    def inverse(self, sig0):
+    def inverse(self):
         """
         Inverse transform.
-
-        Parameters
-        ----------
-        sig0 : 1d array
-            Reference signal.
 
         Returns
         -------
@@ -89,11 +86,10 @@ class CDT(BaseTransform):
             Reconstructed signal sig1.
         """
         self._check_is_fitted()
-        return self.apply_inverse_map(self.transport_map_, sig0)
+        return self.apply_inverse_map(self.transport_map_, self.sig0_)
 
 
-    @staticmethod
-    def apply_forward_map(transport_map, sig1):
+    def apply_forward_map(self, transport_map, sig1):
         """
         Appy forward transport map.
 
@@ -123,8 +119,7 @@ class CDT(BaseTransform):
         return sig0_recon
 
 
-    @staticmethod
-    def apply_inverse_map(transport_map, sig0):
+    def apply_inverse_map(self, transport_map, sig0):
         """
         Apply inverse transport map.
 

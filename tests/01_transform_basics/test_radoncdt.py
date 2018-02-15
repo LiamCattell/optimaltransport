@@ -1,3 +1,6 @@
+import sys
+sys.path.append('../../../optimaltransport')
+
 import numpy as np
 import matplotlib.pyplot as plt
 from skimage import data
@@ -16,11 +19,13 @@ sigma = 1
 sig0 = signal_to_pdf(img0, sigma=sigma)
 sig1 = signal_to_pdf(img1, sigma=sigma)
 
-radoncdt = RadonCDT()
+theta = np.arange(0,179,2)
+radoncdt = RadonCDT(theta=theta)
+sig1_hat = radoncdt.forward(sig0, sig1)
 
-rcdt = radoncdt.forward(sig0, sig1)
 sig0_recon = radoncdt.apply_forward_map(radoncdt.transport_map_, sig1)
-sig1_recon = radoncdt.inverse(sig0)
+sig1_recon = radoncdt.apply_inverse_map(radoncdt.transport_map_, sig0)
+# sig1_recon = radoncdt.inverse()
 
 
 fig, ax = plt.subplots(3,2)
@@ -34,7 +39,7 @@ ax[1,1].imshow(sig1_recon)
 ax[1,1].set_title('Reconstructed sig1')
 ax[2,0].imshow(radoncdt.displacements_)
 ax[2,0].set_title('Displacements u')
-ax[2,1].imshow(rcdt)
+ax[2,1].imshow(sig1_hat)
 ax[2,1].set_title('Radon-CDT')
 
 plt.show()
