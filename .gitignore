@@ -1,0 +1,2 @@
+# Ignore datasets directory (because it's huge!)
+optrans/datasets/*

@@ -1,6 +1,8 @@
 import numpy as np
 from scipy import interp
 
+import matplotlib.pyplot as plt
+
 from .base import BaseTransform
 from ..utils import check_array, assert_equal_shape
 
@@ -60,6 +62,9 @@ class CDT(BaseTransform):
 
         # Compute transport map: f = x - u
         self.transport_map_ = x - self.displacements_
+
+        # self.transport_map_ = interp(cum1, cum0, x)
+        # self.displacements_ = x - self.transport_map_
 
         # CDT = (x - f) * sqrt(I0)
         cdt = self.displacements_ * np.sqrt(sig0)
