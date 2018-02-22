@@ -102,3 +102,31 @@ def check_array(array, ndim=None, dtype='numeric', force_all_finite=True,
         raise ValueError("Array must be strictly positive (i.e. > 0).")
 
     return array
+
+
+def check_decomposition(obj):
+    """
+    Check that an object is a PCA or PLDA (i.e. decomposition) object.
+
+    Parameters
+    ----------
+    obj : object
+        Object to check
+
+    Returns
+    -------
+    mean : array, shape (n_features,)
+        Mean of the data in the decomposition object
+    components : array, shape (n_components, n_features)
+        Components learned by the decomposition object
+    std : array, shape (n_components,)
+        Standard deviation of the training data projected on to each component
+    """
+    # Check that decomp is a PCA or PLDA object
+    try:
+        mean = obj.mean_
+        components = obj.components_
+        std = np.sqrt(obj.explained_variance_)
+        return mean, components, std
+    except AttributeError:
+        raise

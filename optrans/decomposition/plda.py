@@ -27,7 +27,9 @@ class PLDA():
     components_ : array, shape (n_components, n_features)
         Axes in the feature space. The components are sorted by the explained
         variance.
-    explained_variance_ratio_ : array, shape(n_components)
+    explained_variance_ : array, shape (n_components,)
+        The amount of variance explained by each of the selected components.
+    explained_variance_ratio_ : array, shape(n_components,)
         Proportion of variance explained by each of the selected components.
         If n_components is not set then all components are stored and the sum
         of explained variance ratios is equal to 1.0.
@@ -183,6 +185,9 @@ class PLDA():
             self.intercept_ = np.array(self.intercept_[1]-self.intercept_[0],
                                        ndmin=1)
 
+        # Transform data so we can get the explained variance
+        self.explained_variance_ = np.dot(X, self.components_.T).var(axis=0)
+
         self.is_fitted = True
         return
 
@@ -236,6 +241,35 @@ class PLDA():
         """
         self.fit(X, y)
         return self.transform(X)
+
+
+    def inverse_transform(self, X):
+        """
+        Transform data back to its original space.
+
+        Parameters
+        ----------
+        X : array shape (n_samples, n_components)
+            New data.
+
+        Returns
+        -------
+        X_original : array, shape (n_samples, n_features)
+            Data transformed back into original space.
+        """
+        self._check_is_fitted()
+
+        X = check_array(X, ndim=2)
+
+        # Check data dimensions
+        if X.shape[1] != self.n_components_:
+            raise ValueError("X has {} features per sample."
+                             "Expecting {}".format(X.shape[1],
+                             self.n_components_))
+
+        # Inverse transform
+        X_original = self.mean_ + np.dot(X, self.components_)
+        return X_original
 
 
     def decision_function(self, X):

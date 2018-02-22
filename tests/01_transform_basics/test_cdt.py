@@ -31,6 +31,7 @@ sig0_recon = cdt.apply_forward_map(cdt.transport_map_, sig1)
 sig1_recon = cdt.apply_inverse_map(cdt.transport_map_, sig0)
 # sig1_recon = cdt.inverse()
 
+# Plot results
 fig, ax = plt.subplots(3, 2, sharex=True)
 ax[0,0].plot(sig0)
 ax[0,0].set_title('Reference sig0')

@@ -80,13 +80,13 @@ def match_shape2d(a, b):
     # Adjust the height of array b
     if dy > 0:
         ylo = dy // 2
-        yhi = b.shape[0] - ylo
+        yhi = b.shape[0] - ylo - 1
         b = b[ylo:yhi,:]
 
     # Adjust the width of array b
     if dx > 0:
         xlo = dx // 2
-        xhi = b.shape[1] - xlo
+        xhi = b.shape[1] - xlo - 1
         b = b[:,xlo:xhi]
 
     return b
