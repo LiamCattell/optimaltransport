@@ -190,7 +190,7 @@ def _image_shape(n_features):
 
 
 def plot_mode_histogram(X, y=None, component=0, decomp=None, n_std=3.,
-                        n_bins=10):
+                        n_bins=10, **kwargs):
     """
     Plot the histogram of data projected on to a particular direction.
 
@@ -254,7 +254,7 @@ def plot_mode_histogram(X, y=None, component=0, decomp=None, n_std=3.,
     pos = pos[:-1] + np.diff(pos)/2
 
     # Plot histogram(s)
-    fig, ax = plt.subplots(1, 1)
+    fig, ax = plt.subplots(1, 1, **kwargs)
     if isinstance(hist, list):
         for p,h in zip(pos,hist):
             ax.bar(bin_centers+p, h, width=width)
@@ -270,7 +270,8 @@ def plot_mode_histogram(X, y=None, component=0, decomp=None, n_std=3.,
 
 
 def plot_mode_image(pipeline, component=0, shape=None, transform=None,
-                    img0=None, n_std=3., n_steps=5, padding=2):
+                    img0=None, n_std=3., n_steps=5, padding=2, cmap=None,
+                    **kwargs):
     """
     Plot the mode of variation along a given direction through the data (in
     image space).
@@ -306,6 +307,8 @@ def plot_mode_image(pipeline, component=0, shape=None, transform=None,
         Number of steps along the direction.
     padding : int (default=2)
         Padding (in pixels) between images in the mode of variation.
+    cmap : matplotlib.Colormap or None
+        Image colormap.
 
     Returns
     -------
@@ -324,10 +327,14 @@ def plot_mode_image(pipeline, component=0, shape=None, transform=None,
                         padding=padding)
 
     # Plot the mode of variation
-    fig, ax = plt.subplots(1, 1)
-    ax.imshow(img, extent=extent)
+    fig, ax = plt.subplots(1, 1, **kwargs)
+    ax.imshow(img, cmap=cmap, extent=extent)
     ax.set_xlabel("$\sigma$")
     ax.axes.get_yaxis().set_visible(False)
     ax.set_title("Mode of variation along component {}".format(component))
 
     return ax
+
+
+def plot_mode_histogram_image():
+    return

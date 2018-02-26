@@ -33,6 +33,8 @@ def signal_to_pdf(input, sigma=0., epsilon=1e-8, total=1.):
     pdf : ndarray
         Returned array of same shape as input
     """
+    input = check_array(input, dtype=['float32','float64'])
+
     if sigma < 0:
         raise ValueError('sigma must be >= 0.')
 
