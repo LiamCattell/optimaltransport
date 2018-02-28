@@ -247,6 +247,9 @@ class PLDA():
         """
         Transform data back to its original space.
 
+        Note: If n_components is less than the maximum, information will be
+        lost, so reconstructed data will not exactly match the original data.
+
         Parameters
         ----------
         X : array shape (n_samples, n_components)
@@ -269,6 +272,7 @@ class PLDA():
 
         # Inverse transform
         X_original = self.mean_ + np.dot(X, self.components_)
+
         return X_original
 
 
@@ -387,3 +391,33 @@ class PLDA():
                              "{} vs {}".format(X.shape[0], y.size))
 
         return accuracy_score(y, self.predict(X), sample_weight=sample_weight)
+
+
+    def predict_transformed(self, X_trans):
+        self._check_is_fitted()
+
+        # Check input array
+        X_trans = check_array(X_trans, ndim=2)
+
+        # Make sure this is a set of transformed data
+        if X_trans.shape[1] != self.n_components_:
+            raise ValueError("Number of features in X_trans must match "
+                             "n_components: {}".format(self.n_components_))
+
+        # Transform class means into PLDA space
+        mean_trans = self.transform(self.class_means_)
+
+        # Initialize useful values
+        n_samples = X_trans.shape[0]
+        n_classes = mean_trans.shape[0]
+        dists = np.zeros((n_samples,n_classes))
+
+        # Compute the distance between each data sample and each class mean
+        for i,mean in enumerate(mean_trans):
+            dists[:,i] = np.linalg.norm(X_trans-np.tile(mean,(n_samples,1)),
+                                        axis=1)
+
+        # Classification based on shortest distance to class mean
+        ind = dists.argmin(axis=1)
+
+        return self.classes_[ind]

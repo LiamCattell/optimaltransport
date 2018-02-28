@@ -6,13 +6,14 @@ import matplotlib.pyplot as plt
 from matplotlib import colors
 from sklearn.model_selection import train_test_split, StratifiedKFold
 from sklearn.decomposition import PCA
+from sklearn.metrics import accuracy_score
 
 from optrans.datasets import adni
 from optrans.decomposition import PLDA
 
 space = 'rcdt'
 n_splits = 5
-random_state = 42
+random_state = 11
 
 if space == 'image':
     X, y = adni.load_data()
@@ -22,49 +23,44 @@ else:
 n_imgs, h, w = X.shape
 X = X.reshape((n_imgs, h*w))
 
-print(np.bincount(y))
-
 cv = StratifiedKFold(n_splits=n_splits, shuffle=True, random_state=random_state)
-acc = np.zeros(n_splits)
 
 for i,(tr,te) in enumerate(cv.split(X, y)):
     pca = PCA()
     Xtr_pca = pca.fit_transform(X[tr])
     Xte_pca = pca.transform(X[te])
 
-    plda = PLDA(n_components=2, alpha=5.)
+    plda = PLDA(n_components=2, alpha=1.)
     plda.fit(Xtr_pca, y[tr])
-    acc[i] = plda.score(Xte_pca, y[te])
-    print('Fold ', i, ' -- acc: ', acc[i])
+    Xte_plda = plda.transform(Xte_pca)
 
-print('ACC: ', acc.mean())
-print('STD: ', acc.std())
+    # y_pred = plda.predict(Xte_pca)
+    y_pred = plda.predict_transformed(Xte_plda)
+    acc = accuracy_score(y[te], y_pred)
 
-# Transform final split
-Xte_plda = plda.transform(Xte_pca)
+    print('Fold ', i, ' -- acc: ', acc)
+    # print('........ -- ac2: ', acc2)
+
 
 # Create a grid of points to plot the shaded regions
 xx, yy = np.meshgrid(np.linspace(1.05*Xte_plda[:,0].min(),1.05*Xte_plda[:,0].max(),300),
                      np.linspace(1.05*Xte_plda[:,1].min(),1.05*Xte_plda[:,1].max(),300))
 
-grid_pca = plda.inverse_transform(np.c_[xx.ravel(),yy.ravel()])
+# Classify grid in PLDA space
+zz = plda.predict_transformed(np.c_[xx.ravel(),yy.ravel()]).reshape(xx.shape)
 
-# Get predicted classes of grid points
-zz = plda.predict(grid_pca).reshape(xx.shape)
-
-print(plda.coef_)
-print(plda.intercept_)
-print(plda.class_means_)
 
 cols = ['royalblue', 'red']
 names = ['Healthy', 'AD']
 
 # Plot test data
 fig, ax = plt.subplots(1, 1)
+
 ax.contourf(xx, yy, zz, cmap=colors.ListedColormap(cols), alpha=0.2)
-for lab,c,name in zip([0,1],cols,names):
-    ax.scatter(Xte_plda[y[te]==lab,0], Xte_plda[y[te]==lab,1], c=c, s=40,
-               alpha=1., label=name)
-ax.set_title('Accuracy = {:.1f}%'.format(acc[i]*100))
-plt.legend(fontsize=12, loc=2)
+ax.scatter(Xte_plda[:,0], Xte_plda[:,1], c=y[te], s=40,
+              cmap=colors.ListedColormap(cols), alpha=0.6)
+ax.scatter(Xte_plda[:,0], Xte_plda[:,1], c=y_pred, s=40, marker='x',
+              cmap=colors.ListedColormap(cols), alpha=1.)
+ax.set_title('Accuracy = {:.1f}%'.format(acc*100))
+
 plt.show()
