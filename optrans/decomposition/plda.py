@@ -380,6 +380,23 @@ class PLDA():
 
 
     def score(self, X, y, sample_weight=None):
+        """
+        Returns the mean accuracy on the given test data and labels.
+
+        Parameters
+        ----------
+        X : array, shape (n_samples, n_features)
+            Test samples.
+        y : array, shape (n_samples,)
+            True labels for X.
+        sample_weight : array, shape (n_samples,), optional
+            Sample weights.
+
+        Returns
+        -------
+        score : float
+            Mean accuracy of self.predict(X) w.r.t. y.
+        """
         # Check input arrays
         X = check_array(X, ndim=2, dtype='numeric', force_all_finite=True)
         y = check_array(y.astype(int), ndim=1, dtype='numeric',
@@ -394,6 +411,24 @@ class PLDA():
 
 
     def predict_transformed(self, X_trans):
+        """
+        Predict class labels for data that have already been transformed by
+        self.transform(X).
+
+        This is useful for plotting classification boundaries.
+        Note: Due to arithemtic discrepancies, this may return slightly
+        different class labels to self.predict(X).
+
+        Parameters
+        ----------
+        X_trans : array, shape (n_samples, n_components)
+            Test samples that have already been transformed into PLDA space.
+
+        Returns
+        -------
+        y : array, shape (n_samples,)
+            Predicted class labels for X_trans.
+        """
         self._check_is_fitted()
 
         # Check input array
