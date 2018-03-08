@@ -1,0 +1,406 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Continuous module &#8212; optimaltransport 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="optimaltransport 1.0 documentation" href="index.html" />
+    <link rel="prev" title="Welcome to optimaltransport’s documentation!" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to optimaltransport’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">optimaltransport 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-optrans.continuous">
+<span id="continuous-module"></span><h1>Continuous module<a class="headerlink" href="#module-optrans.continuous" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="optrans.continuous.BaseTransform">
+<em class="property">class </em><code class="descclassname">optrans.continuous.</code><code class="descname">BaseTransform</code><a class="headerlink" href="#optrans.continuous.BaseTransform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class for optimal transport transform methods.</p>
+<p>Warning: This class should not be used directly.
+Use derived classes instead.</p>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="optrans.continuous.BaseTransform.apply_forward_map">
+<code class="descname">apply_forward_map</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.BaseTransform.apply_forward_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Placeholder for application of forward transport map.
+Subclasses should implement this method!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.continuous.BaseTransform.apply_inverse_map">
+<code class="descname">apply_inverse_map</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.BaseTransform.apply_inverse_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Placeholder for application of inverse transport map.
+Subclasses should implement this method!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.continuous.BaseTransform.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.BaseTransform.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Placeholder for forward transform.
+Subclasses should implement this method!</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.continuous.BaseTransform.inverse">
+<code class="descname">inverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.BaseTransform.inverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Placeholder for inverse transform.
+Subclasses should implement this method!</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="optrans.continuous.CDT">
+<em class="property">class </em><code class="descclassname">optrans.continuous.</code><code class="descname">CDT</code><a class="headerlink" href="#optrans.continuous.CDT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cumulative Distribution Transform.</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="66%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a href="#id1"><span class="problematic" id="id2">displacements_</span></a></td>
+<td>(1d array) Displacements u.</td>
+</tr>
+<tr class="row-even"><td><a href="#id3"><span class="problematic" id="id4">transport_map_</span></a></td>
+<td>(1d array) Transport map f.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="optrans.continuous.CDT.apply_forward_map">
+<code class="descname">apply_forward_map</code><span class="sig-paren">(</span><em>transport_map</em>, <em>sig1</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.CDT.apply_forward_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appy forward transport map.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>transport_map</strong> : 1d array</p>
+<blockquote>
+<div><p>Forward transport map.</p>
+</div></blockquote>
+<p><strong>sig1</strong> : 1d array</p>
+<blockquote>
+<div><p>Signal to transform.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sig0_recon</strong> : 1d array</p>
+<blockquote class="last">
+<div><p>Reconstructed reference signal sig0.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.continuous.CDT.apply_inverse_map">
+<code class="descname">apply_inverse_map</code><span class="sig-paren">(</span><em>transport_map</em>, <em>sig0</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.CDT.apply_inverse_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply inverse transport map.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>transport_map</strong> : 1d array</p>
+<blockquote>
+<div><p>Forward transport map. Inverse is computed in this function.</p>
+</div></blockquote>
+<p><strong>sig0</strong> : 1d array</p>
+<blockquote>
+<div><p>Reference signal.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sig1_recon</strong> : 1d array</p>
+<blockquote class="last">
+<div><p>Reconstructed signal sig1.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.continuous.CDT.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>sig0</em>, <em>sig1</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.CDT.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward transform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>sig0</strong> : 1d array</p>
+<blockquote>
+<div><p>Reference signal.</p>
+</div></blockquote>
+<p><strong>sig1</strong> : 1d array</p>
+<blockquote>
+<div><p>Signal to transform.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>lot</strong> : 1d array</p>
+<blockquote class="last">
+<div><p>CDT of input signal sig1.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.continuous.CDT.inverse">
+<code class="descname">inverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.CDT.inverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inverse transform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sig1_recon</strong> : 1d array</p>
+<blockquote class="last">
+<div><p>Reconstructed signal sig1.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="optrans.continuous.RadonCDT">
+<em class="property">class </em><code class="descclassname">optrans.continuous.</code><code class="descname">RadonCDT</code><span class="sig-paren">(</span><em>theta=array([  0</em>, <em>1</em>, <em>2</em>, <em>3</em>, <em>4</em>, <em>5</em>, <em>6</em>, <em>7</em>, <em>8</em>, <em>9</em>, <em>10</em>, <em>11</em>, <em>12</em>, <em>13</em>, <em>14</em>, <em>15</em>, <em>16</em>, <em>17</em>, <em>18</em>, <em>19</em>, <em>20</em>, <em>21</em>, <em>22</em>, <em>23</em>, <em>24</em>, <em>25</em>, <em>26</em>, <em>27</em>, <em>28</em>, <em>29</em>, <em>30</em>, <em>31</em>, <em>32</em>, <em>33</em>, <em>34</em>, <em>35</em>, <em>36</em>, <em>37</em>, <em>38</em>, <em>39</em>, <em>40</em>, <em>41</em>, <em>42</em>, <em>43</em>, <em>44</em>, <em>45</em>, <em>46</em>, <em>47</em>, <em>48</em>, <em>49</em>, <em>50</em>, <em>51</em>, <em>52</em>, <em>53</em>, <em>54</em>, <em>55</em>, <em>56</em>, <em>57</em>, <em>58</em>, <em>59</em>, <em>60</em>, <em>61</em>, <em>62</em>, <em>63</em>, <em>64</em>, <em>65</em>, <em>66</em>, <em>67</em>, <em>68</em>, <em>69</em>, <em>70</em>, <em>71</em>, <em>72</em>, <em>73</em>, <em>74</em>, <em>75</em>, <em>76</em>, <em>77</em>, <em>78</em>, <em>79</em>, <em>80</em>, <em>81</em>, <em>82</em>, <em>83</em>, <em>84</em>, <em>85</em>, <em>86</em>, <em>87</em>, <em>88</em>, <em>89</em>, <em>90</em>, <em>91</em>, <em>92</em>, <em>93</em>, <em>94</em>, <em>95</em>, <em>96</em>, <em>97</em>, <em>98</em>, <em>99</em>, <em>100</em>, <em>101</em>, <em>102</em>, <em>103</em>, <em>104</em>, <em>105</em>, <em>106</em>, <em>107</em>, <em>108</em>, <em>109</em>, <em>110</em>, <em>111</em>, <em>112</em>, <em>113</em>, <em>114</em>, <em>115</em>, <em>116</em>, <em>117</em>, <em>118</em>, <em>119</em>, <em>120</em>, <em>121</em>, <em>122</em>, <em>123</em>, <em>124</em>, <em>125</em>, <em>126</em>, <em>127</em>, <em>128</em>, <em>129</em>, <em>130</em>, <em>131</em>, <em>132</em>, <em>133</em>, <em>134</em>, <em>135</em>, <em>136</em>, <em>137</em>, <em>138</em>, <em>139</em>, <em>140</em>, <em>141</em>, <em>142</em>, <em>143</em>, <em>144</em>, <em>145</em>, <em>146</em>, <em>147</em>, <em>148</em>, <em>149</em>, <em>150</em>, <em>151</em>, <em>152</em>, <em>153</em>, <em>154</em>, <em>155</em>, <em>156</em>, <em>157</em>, <em>158</em>, <em>159</em>, <em>160</em>, <em>161</em>, <em>162</em>, <em>163</em>, <em>164</em>, <em>165</em>, <em>166</em>, <em>167</em>, <em>168</em>, <em>169</em>, <em>170</em>, <em>171</em>, <em>172</em>, <em>173</em>, <em>174</em>, <em>175</em>, <em>176</em>, <em>177</em>, <em>178</em>, <em>179])</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.RadonCDT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Radon Cumulative Distribution Transform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>theta</strong> : 1d array (default=np.arange(180))</p>
+<blockquote class="last">
+<div><p>Radon transform projection angles.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a href="#id5"><span class="problematic" id="id6">displacements_</span></a></td>
+<td>(array, shape (t, len(theta))) Displacements u.</td>
+</tr>
+<tr class="row-even"><td><a href="#id7"><span class="problematic" id="id8">transport_map_</span></a></td>
+<td>(array, shape (t, len(theta))) Transport map f.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="optrans.continuous.RadonCDT.apply_forward_map">
+<code class="descname">apply_forward_map</code><span class="sig-paren">(</span><em>transport_map</em>, <em>sig1</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.RadonCDT.apply_forward_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appy forward transport map.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>transport_map</strong> : array, shape (t, len(theta))</p>
+<blockquote>
+<div><p>Forward transport map.</p>
+</div></blockquote>
+<p><strong>sig1</strong> : 2d array, shape (height, width)</p>
+<blockquote>
+<div><p>Signal to transform.</p>
+</div></blockquote>
+<p><strong>theta</strong> : array (default=np.arange(180))</p>
+<blockquote>
+<div><p>Radon transform projection angles.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sig0_recon</strong> : array, shape (height, width)</p>
+<blockquote class="last">
+<div><p>Reconstructed reference signal sig0.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.continuous.RadonCDT.apply_inverse_map">
+<code class="descname">apply_inverse_map</code><span class="sig-paren">(</span><em>transport_map</em>, <em>sig0</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.RadonCDT.apply_inverse_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appy inverse transport map.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>transport_map</strong> : 2d array, shape (t, len(theta))</p>
+<blockquote>
+<div><p>Forward transport map. Inverse is computed in this function.</p>
+</div></blockquote>
+<p><strong>sig0</strong> : array, shape (height, width)</p>
+<blockquote>
+<div><p>Reference signal.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sig1_recon</strong> : array, shape (height, width)</p>
+<blockquote class="last">
+<div><p>Reconstructed signal sig1.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.continuous.RadonCDT.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>sig0</em>, <em>sig1</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.RadonCDT.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward transform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>sig0</strong> : array, shape (height, width)</p>
+<blockquote>
+<div><p>Reference image.</p>
+</div></blockquote>
+<p><strong>sig1</strong> : array, shape (height, width)</p>
+<blockquote>
+<div><p>Signal to transform.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>rcdt</strong> : array, shape (t, len(theta))</p>
+<blockquote class="last">
+<div><p>Radon-CDT of input image sig1.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.continuous.RadonCDT.inverse">
+<code class="descname">inverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.RadonCDT.inverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inverse transform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sig1_recon</strong> : array, shape (height, width)</p>
+<blockquote class="last">
+<div><p>Reconstructed signal sig1.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to optimaltransport&#8217;s documentation!</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/continuous.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to optimaltransport’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">optimaltransport 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Liam Cattell.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

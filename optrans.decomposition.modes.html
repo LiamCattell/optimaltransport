@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module optrans.decomposition.modes</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="optrans.html"><font color="#ffffff">optrans</font></a>.<a href="optrans.decomposition.html"><font color="#ffffff">decomposition</font></a>.modes</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:x%3A%5Cliam%5Ccode%5Cpython%5Coptimaltransport%5Coptrans%5Cdecomposition%5Cmodes.py">x:\liam\code\python\optimaltransport\optrans\decomposition\modes.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="numpy.html">numpy</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-get_mode_histogram"><strong>get_mode_histogram</strong></a>(X, y=None, component=0, n_bins=10, rng=None)</dt><dd><tt>Compute&nbsp;the&nbsp;normalized&nbsp;histogram&nbsp;of&nbsp;the&nbsp;data&nbsp;projected&nbsp;on&nbsp;to&nbsp;a&nbsp;given<br>
+component.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+X&nbsp;:&nbsp;array,&nbsp;shape&nbsp;(n_samples,&nbsp;n_components)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Data.<br>
+y&nbsp;:&nbsp;array,&nbsp;shape&nbsp;(n_samples,)&nbsp;or&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Class&nbsp;labels.&nbsp;If&nbsp;class&nbsp;labels&nbsp;are&nbsp;provided,&nbsp;this&nbsp;function&nbsp;will&nbsp;compute<br>
+&nbsp;&nbsp;&nbsp;&nbsp;a&nbsp;separate&nbsp;histogram&nbsp;for&nbsp;each&nbsp;class.<br>
+component&nbsp;:&nbsp;int&nbsp;(default=0)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Index&nbsp;of&nbsp;the&nbsp;desired&nbsp;component.<br>
+n_bins&nbsp;:&nbsp;int&nbsp;(default=10)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Number&nbsp;of&nbsp;histogram&nbsp;bins.<br>
+rng&nbsp;:&nbsp;(float,&nbsp;float)&nbsp;or&nbsp;None<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;lower&nbsp;and&nbsp;upper&nbsp;range&nbsp;of&nbsp;the&nbsp;bins.&nbsp;If&nbsp;not&nbsp;provided,&nbsp;rng&nbsp;is&nbsp;simply<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(X.min(),&nbsp;X.max()).&nbsp;The&nbsp;first&nbsp;element&nbsp;of&nbsp;the&nbsp;range&nbsp;must&nbsp;be&nbsp;less&nbsp;than&nbsp;or<br>
+&nbsp;&nbsp;&nbsp;&nbsp;equal&nbsp;to&nbsp;the&nbsp;second.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+hist&nbsp;:&nbsp;array,&nbsp;shape&nbsp;(n_bins,)&nbsp;or&nbsp;list&nbsp;of&nbsp;arrays,&nbsp;length&nbsp;(n_classes)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;The&nbsp;normalized&nbsp;values&nbsp;of&nbsp;the&nbsp;histogram.&nbsp;If&nbsp;class&nbsp;labels&nbsp;are&nbsp;provided,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;hist&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;arrays&nbsp;(one&nbsp;for&nbsp;each&nbsp;class).<br>
+bin_centers&nbsp;:&nbsp;array,&nbsp;shape&nbsp;(n_bins,)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Histogram&nbsp;bin&nbsp;centers.&nbsp;The&nbsp;bin&nbsp;centers&nbsp;are&nbsp;the&nbsp;same&nbsp;for&nbsp;all&nbsp;classes.</tt></dd></dl>
+ <dl><dt><a name="-get_mode_variation"><strong>get_mode_variation</strong></a>(decomp, component=0, n_std=3.0, n_steps=5)</dt><dd><tt>Get&nbsp;the&nbsp;mode&nbsp;of&nbsp;variation&nbsp;along&nbsp;a&nbsp;given&nbsp;direction&nbsp;through&nbsp;the&nbsp;data.<br>
+&nbsp;<br>
+Parameters<br>
+----------<br>
+decomp&nbsp;:&nbsp;object<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;trained&nbsp;PCA&nbsp;or&nbsp;PLDA&nbsp;object.<br>
+component&nbsp;:&nbsp;int&nbsp;(default=0.)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Index&nbsp;of&nbsp;the&nbsp;desired&nbsp;component.<br>
+n_std&nbsp;:&nbsp;float&nbsp;(default=3.)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Range&nbsp;of&nbsp;standard&nbsp;deviations&nbsp;along&nbsp;the&nbsp;direction.&nbsp;For&nbsp;example&nbsp;if<br>
+&nbsp;&nbsp;&nbsp;&nbsp;n_std=3,&nbsp;the&nbsp;returned&nbsp;data&nbsp;will&nbsp;correspond&nbsp;to&nbsp;the&nbsp;range&nbsp;-1.5*std&nbsp;to<br>
+&nbsp;&nbsp;&nbsp;&nbsp;+1.5*std<br>
+n_steps&nbsp;:&nbsp;int&nbsp;(default=5)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Number&nbsp;of&nbsp;steps&nbsp;along&nbsp;the&nbsp;direction.<br>
+&nbsp;<br>
+Returns<br>
+-------<br>
+mode&nbsp;:&nbsp;array,&nbsp;shape&nbsp;(n_steps,&nbsp;n_features)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Reconstructed&nbsp;data&nbsp;along&nbsp;desired&nbsp;direction.</tt></dd></dl>
+</td></tr></table>
+</body></html>
