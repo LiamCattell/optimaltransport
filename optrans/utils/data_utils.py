@@ -73,25 +73,14 @@ def match_shape2d(a, b):
     b = check_array(b, ndim=2, force_all_finite=False)
 
     # Difference in dimensions
-    dy = b.shape[0] - a.shape[0]
-    dx = b.shape[1] - a.shape[1]
-    if dy < 0 or dx < 0:
+    h, w = a.shape
+    ylo = (b.shape[0] - h) // 2
+    xlo = (b.shape[1] - w) // 2
+    if ylo < 0 or xlo < 0:
         raise ValueError("A is bigger than B: "
                          "{!s} vs {!s}".format(a.shape, b.shape))
 
-    # Adjust the height of array b
-    if dy > 0:
-        ylo = dy // 2
-        yhi = b.shape[0] - ylo - 1
-        b = b[ylo:yhi,:]
-
-    # Adjust the width of array b
-    if dx > 0:
-        xlo = dx // 2
-        xhi = b.shape[1] - xlo - 1
-        b = b[:,xlo:xhi]
-
-    return b
+    return b[ylo:ylo+h,xlo:xlo+w]
 
 
 def interp2d(img, xi, order=2, fill_value=0.):

@@ -99,3 +99,32 @@ def get_mode_histogram(X, y=None, component=0, n_bins=10, rng=None):
         return hist[0], bin_centers
     else:
         return hist, bin_centers
+
+
+def fit_line(x, y):
+    """
+    Fit a straight line to points (x, y) using least squares.
+
+    Parameters
+    ----------
+    x, y : array_like, shape (M,)
+        x- and y-coordinates of the M sample points.
+
+    Returns
+    -------
+    xl : array, shape (2,)
+        Most extreme x-coordinates (i.e. [min(x), max(x)]).
+    yl : array, shape (2,)
+        y-coordinates of the line passing through x_ends.
+    """
+    # Fit a straigt line to points (x,y)
+    coef = np.polyfit(x, y, 1)
+    y_line = coef[0] * x + coef[1]
+
+    # Get the left-most and right-most coordinates of the line
+    imin = x.argmin()
+    imax = x.argmax()
+    xl = np.array([x[imin], x[imax]])
+    yl = np.array([y_line[imin], y_line[imax]])
+
+    return xl, yl

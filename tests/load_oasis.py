@@ -30,7 +30,9 @@ def load_original():
     mmse = dataset['MMSE'].tolist()
     cdr = dataset['CDR'].tolist()
     etiv = dataset['eTIV'].tolist()
-    metadata = np.array([sex, age, edu, ses, mmse, cdr, etiv]).T
+    nwbv = dataset['nWBV'].tolist()
+    asf = dataset['ASF'].tolist()
+    metadata = np.array([sex, age, edu, ses, mmse, cdr, etiv, nwbv, asf]).T
 
     n_samples = len(dataset)
     X = np.zeros((n_samples,208,176))
@@ -86,5 +88,5 @@ def generate_radoncdt():
 
 
 if __name__ == '__main__':
-    # load_original()
+    load_original()
     generate_radoncdt()

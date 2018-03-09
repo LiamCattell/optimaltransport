@@ -19,8 +19,8 @@ _, _, metadata = oasis.load_data()
 metadata = metadata[~np.isnan(metadata).any(axis=1)]
 
 # Select the metadata to use
-X = metadata[:,1:3]       # [age, education]
-Y = metadata[:,4:7]       # [mmse, cdr, etiv]
+X = metadata[:,[1,4]]       # [age, mmse]
+Y = metadata[:,6:9]       # [etiv, nwbv, asf]
 
 # Split into training and testing data
 Xtr, Xte, Ytr, Yte = train_test_split(X, Y, test_size=.25, random_state=42)

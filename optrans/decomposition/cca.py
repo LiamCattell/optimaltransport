@@ -89,6 +89,14 @@ class CCA():
             raise ValueError("Number of samples in X and Y must be the same: "
                              "{} vs {}".format(X.shape[0], Y.shape[0]))
 
+        if self.n_components_ > X.shape[1]:
+            raise ValueError("n_components exceeds number of features in X: "
+                             "{} > {}".format(self.n_components_, X.shape[1]))
+
+        if self.n_components_ > Y.shape[1]:
+            raise ValueError("n_components exceeds number of targets in Y: "
+                             "{} > {}".format(self.n_components_, Y.shape[1]))
+
         self.cca.fit(X, Y)
 
         self.components_ = self.cca.x_weights_.T
@@ -126,10 +134,18 @@ class CCA():
         self._check_is_fitted()
 
         X = check_array(X, ndim=2, dtype='numeric', force_all_finite=True)
-        if Y is not None:
-            Y = check_array(Y, ndim=2, dtype='numeric', force_all_finite=True)
 
-        return self.cca.transform(X, Y=Y, copy=True)
+        if Y is None:
+            return self.cca.transform(X, Y=None, copy=True)
+        else:
+            Y = check_array(Y, ndim=2, dtype='numeric', force_all_finite=True)
+            X_new, Y_new = self.cca.transform(X, Y=Y, copy=True)
+
+            # If n_components=1, reshape Y_new so it is 2D
+            if self.n_components_ == 1:
+                n_samples = Y_new.shape[0]
+                Y_new = Y_new.reshape((n_samples,1))
+            return X_new, Y_new
 
 
     def fit_transform(self, X, Y):

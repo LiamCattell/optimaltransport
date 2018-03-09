@@ -4,12 +4,16 @@ sys.path.append('../../../optimaltransport')
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
-from sklearn.cross_decomposition import CCA
 from sklearn.model_selection import train_test_split
 
 from optrans.datasets import oasis
+from optrans.decomposition import CCA, fit_line
+from optrans.continuous import RadonCDT
+from optrans.visualization import plot_mode_image
 
-X, y, metadata = oasis.load_data()
+# X, y, metadata = oasis.load_data()
+X, y, metadata = oasis.load_rcdt_maps()
+img0 = oasis.load_img0()
 
 ind = ~np.isnan(metadata).any(axis=1)
 X = X[ind]
@@ -22,32 +26,53 @@ X = X.reshape((n_samples,h*w))
 Xtr, Xte, ytr, yte, mtr, mte = train_test_split(X, y, m, test_size=0.5,
                                                 random_state=43)
 
-pca = PCA(n_components=10)
+pca = PCA(n_components=50)
 Xtr_pca = pca.fit_transform(Xtr)
 Xte_pca = pca.transform(Xte)
 
 cca = CCA(n_components=1)
 cca.fit(Xtr_pca, mtr.reshape(-1,1))
-Xtr_cca = np.squeeze(cca.transform(Xtr_pca))
-Xte_cca = np.squeeze(cca.transform(Xte_pca))
 
-# Correlation coefficient of training and test data
-score_tr = np.corrcoef(Xtr_cca, mtr)[0,1]
-score_te = np.corrcoef(Xte_cca, mte)[0,1]
+Xtr_cca = cca.transform(Xtr_pca)
+Xte_cca = cca.transform(Xte_pca)
+
+score_tr = cca.score(Xtr_pca, mtr.reshape(-1,1))
+score_te = cca.score(Xte_pca, mte.reshape(-1,1))
+print('Score tr: ', score_tr)
+print('Score te: ', score_te)
+
+
+plot_mode_image([pca,cca], shape=(h,w), transform=RadonCDT(), img0=img0, n_std=7.)
+plt.show()
+
+
+std = np.sqrt(cca.explained_variance_[0])
+std_range = np.linspace(-1.5, 1.5, 5)
+img_recon = []
+radoncdt = RadonCDT()
+
+for sr in std_range:
+    X_pca_recon = cca.inverse_transform(np.array([[std*sr]]))
+    X_recon = pca.inverse_transform(X_pca_recon)
+    f_recon = X_recon.reshape((h,w))
+    img_recon.append(radoncdt.apply_inverse_map(f_recon, img0))
+
+fig, ax = plt.subplots(1, std_range.size)
+for im,a in zip(img_recon,ax):
+    a.imshow(im, cmap='gray')
+plt.show()
+
+plt.imshow(img_recon[0]-img_recon[-1])
+plt.show()
+
 
 # Get x-y coordinates of correlation line
-coef = np.polyfit(Xte_cca, mte, 1)
-line = coef[0] * Xte_cca + coef[1]
-imin = Xte_cca.argmin()
-imax = Xte_cca.argmax()
-xx = [Xte_cca[imin], Xte_cca[imax]]
-yy = [line[imin], line[imax]]
-
+xl, yl = fit_line(Xte_cca.squeeze(), mte)
 
 # Plot data projected on to first canonical direction
 plt.scatter(Xtr_cca, mtr, c='b', label='train')
 plt.scatter(Xte_cca, mte, c='r', label='test')
-plt.plot(xx, yy, 'k--', lw=2, label='corr. test')
+plt.plot(xl, yl, 'k--', lw=2, label='corr. test')
 plt.xlabel('X scores')
 plt.ylabel('m scores')
 plt.title('R_tr = {:.2f}\nR_te = {:.2f}'.format(score_tr, score_te))
