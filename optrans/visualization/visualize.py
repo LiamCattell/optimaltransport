@@ -74,7 +74,8 @@ def get_mode_image(pipeline, component=0, shape=None, transform=None,
                       "may cause unexpected reshaping errors.", UserWarning)
 
     # Get the mode of variation from the final decomposition
-    mode = list(get_mode_variation(pipeline[-1], component=component, n_steps=n_steps))
+    mode = list(get_mode_variation(pipeline[-1], component=component,
+                n_steps=n_steps))
 
     # Perform inverse transforms to get back to original data space
     for p in pipeline[-2::-1]:

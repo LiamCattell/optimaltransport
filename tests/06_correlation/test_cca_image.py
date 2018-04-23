@@ -26,7 +26,7 @@ X = X.reshape((n_samples,h*w))
 Xtr, Xte, ytr, yte, mtr, mte = train_test_split(X, y, m, test_size=0.5,
                                                 random_state=43)
 
-pca = PCA(n_components=50)
+pca = PCA(n_components=10)
 Xtr_pca = pca.fit_transform(Xtr)
 Xte_pca = pca.transform(Xte)
 
@@ -50,6 +50,7 @@ std = np.sqrt(cca.explained_variance_[0])
 std_range = np.linspace(-1.5, 1.5, 5)
 img_recon = []
 radoncdt = RadonCDT()
+
 
 for sr in std_range:
     X_pca_recon = cca.inverse_transform(np.array([[std*sr]]))

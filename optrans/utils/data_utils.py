@@ -1,6 +1,7 @@
 import numpy as np
 from scipy.ndimage.filters import gaussian_filter
 from scipy.ndimage import map_coordinates
+from scipy.interpolate import griddata
 
 from .validation import check_array, assert_equal_shape
 
@@ -83,14 +84,81 @@ def match_shape2d(a, b):
     return b[ylo:ylo+h,xlo:xlo+w]
 
 
-def interp2d(img, xi, order=2, fill_value=0.):
-    # INTERP ND???
+def interp2d(img, f, order=1, fill_value=0.):
+    """
+    Interpolation for 2D gridded data.
+
+    Parameters
+    ----------
+    img : 2d array, shape (height, width)
+        Image to interpolate. This function assumes a grid of sample points:
+        x = 0:(width-1), y = 0:(height-1).
+    f : 3d array, shape (2, height, width)
+        Coordinates of interpolated points. First dimension f[0] corresponds to
+        y-coordinates, second dimension f[1] is x-coordinates.
+    order : int (default=1)
+        Order of the spline interpolation. Must be in the range 0-5.
+    fill_value : float (default=0.)
+        Value used for points outside the boundaries.
+
+    Returns
+    -------
+    out, 2d array, shape (height, width)
+        Image interpolated at points defined by f.
+    """
+    # Check inputs
     img = check_array(img, ndim=2, force_all_finite=True)
-    xi = check_array(xi, ndim=3, force_all_finite=True)
+    f = check_array(f, ndim=3, force_all_finite=True)
+    assert_equal_shape(img, f[0])
 
-    assert_equal_shape(img, xi[0])
-
+    # Interpolate
     h, w = img.shape
-    # x = [xi[0].ravel(), xi[1].ravel()]
-    out = map_coordinates(img, xi.reshape((2,h*w)), order=order, cval=fill_value)
+    out = map_coordinates(img, f.reshape((2,h*w)), order=order, cval=fill_value)
+
+    return out.reshape((h,w))
+
+
+def griddata2d(img, f, order=1, fill_value=0.):
+    """
+    Interpolate 2d scattered data
+
+    Parameters
+    ----------
+    img : 2d array, shape (height, width)
+        Image to interpolate.
+    f : 3d array, shape (2, height, width)
+        Coordinates of at which img is defined. First dimension f[0] corresponds
+        to y-coordinates, second dimension f[1] is x-coordinates.
+    order : int (default=1)
+        Order of the interpolation. Must be in the range 0-2.
+    fill_value : float (default=0.)
+        Value used for points outside the boundaries.
+
+    Returns
+    -------
+    out, 2d array, shape (height, width)
+        Image interpolated on to regular gird defined by: x = 0:(width-1),
+        y = 0:(height-1).
+    """
+    # Check inputs
+    img = check_array(img, ndim=2, force_all_finite=True)
+    f = check_array(f, ndim=3, force_all_finite=True)
+    assert_equal_shape(img, f[0])
+
+    # Determine interpolation type
+    method = 'linear'
+    if order == 0:
+        method = 'nearest'
+    elif order == 2:
+        method = 'cubic'
+
+    # Create grid of points
+    h, w = img.shape
+    xv, yv = np.meshgrid(np.arange(w,dtype=float), np.arange(h,dtype=float))
+
+    # Interpolate image on to grid
+    out = griddata(f.reshape((2,-1)).T, img.ravel(),
+                   np.c_[yv.ravel(), xv.ravel()], method=method,
+                   fill_value=fill_value)
+
     return out.reshape((h,w))
