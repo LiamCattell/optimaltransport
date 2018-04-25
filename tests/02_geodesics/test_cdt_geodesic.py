@@ -48,3 +48,24 @@ for i,alpha in enumerate(np.linspace(0, 1, 5)):
 ax[0,0].set_ylabel('Signal space')
 ax[1,0].set_ylabel('CDT space')
 plt.show()
+
+
+# sig0_hat = cdt.forward(sig1, sig0)
+#
+# # Plot linear interpolation in signal space and CDT space
+# fig, ax = plt.subplots(2, 5, sharex=True, sharey=True, figsize=(10,6))
+# for i,alpha in enumerate(np.linspace(0, 1, 5)):
+#     # Interpolation in signal space
+#     sig_interp = (1. - alpha) * sig1 + alpha * sig0
+#     ax[0,i].plot(sig_interp)
+#     ax[0,i].set_title('alpha = {:.2f}'.format(alpha))
+#
+#     # Interpolation in CDT space
+#     u = cdt.displacements_ * alpha
+#     f = x - u
+#     sig_recon = cdt.apply_forward_map(f, sig1)
+#     ax[1,i].plot(sig_recon)
+#
+# ax[0,0].set_ylabel('Signal space v2')
+# ax[1,0].set_ylabel('CDT space')
+# plt.show()

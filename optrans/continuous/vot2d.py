@@ -1,5 +1,5 @@
 import numpy as np
-# from scipy.interpolate import griddata
+from skimage.transform import pyramid_reduce, pyramid_expand, resize
 
 from .base import BaseTransform
 from ..utils import check_array, assert_equal_shape
@@ -20,7 +20,7 @@ class VOT2D(BaseTransform):
         self.verbose = verbose
 
 
-    def forward(self, sig0, sig1):
+    def forward(self, sig0, sig1, f_init=None):
         # Check input arrays
         sig0 = check_array(sig0, ndim=2, dtype=[np.float64, np.float32],
                            force_strictly_positive=True)
@@ -33,10 +33,16 @@ class VOT2D(BaseTransform):
         # Set reference signal
         self.sig0_ = sig0
 
-        # Initialise transport map to be identity transform (i.e. f = x)
+        # Initialise regular grid
         h, w = sig0.shape
         xv, yv = np.meshgrid(np.arange(w,dtype=float), np.arange(h,dtype=float))
-        f = np.stack((yv,xv), axis=0)
+
+        # If no initial f is provided, set transport map to be identity
+        # transform (i.e. f = x)
+        if f_init is None:
+            f = np.stack((yv,xv), axis=0)
+        else:
+            f = np.copy(f_init)
 
         # Set the fill value for interpolation
         fill_val = min(sig0.min(), sig1.min())
@@ -138,6 +144,8 @@ class VOT2D(BaseTransform):
         self.displacements_ = f_prev - np.stack((yv,xv))
         lot = self.displacements_ * np.sqrt(sig0)
 
+        self.is_fitted = True
+
         return lot
 
 
@@ -186,6 +194,79 @@ class VOT2D(BaseTransform):
         f1y, f1x = np.gradient(transport_map[1])
         detJ = (f1x * f0y) - (f1y * f0x)
 
+        # Let's hope there are no NaNs/Infs in sig0/detJ
         sig1_recon = griddata2d(sig0/detJ, transport_map, fill_value=sig0.min())
 
         return sig1_recon
+
+
+
+class MultiVOT2D(VOT2D):
+    def __init__(self, n_scales=3, **kwargs):
+        super(MultiVOT2D, self).__init__()
+        self.n_scales = n_scales
+
+        # Create overall parameter dictionary
+        for k in kwargs.keys():
+            # Convert scalars to lists
+            if not (isinstance(kwargs[k],list) or isinstance(kwargs[k],tuple) or
+                isinstance(kwargs[k],np.ndarray)):
+                kwargs[k] = [kwargs[k]] * n_scales
+
+            # Is the list/array/tuple the same length as n_scales?
+            if len(kwargs[k]) != n_scales:
+                raise ValueError("Parameter {} must be a scalar or iterable of "
+                                 "length n_scales={}".format(k, n_scales))
+
+        # Split overall dictionary into separate dictionary for each scale
+        self.params_ = []
+        for i in range(n_scales):
+            p = {}
+            for k,v in kwargs.items():
+                p[k] = v[i]
+            self.params_.append(p)
+
+        return
+
+
+    def forward(self, sig0, sig1):
+        self.transport_map_ = []
+        self.displacements_ = []
+        self.cost_ = []
+        self.mse_ = []
+        self.curl_ = []
+
+        scales = 2**np.arange(self.n_scales)[::-1]
+
+        for i,(sc,par) in enumerate(zip(scales,self.params_)):
+            # Downsample the images if scale > 1
+            if sc > 1:
+                sig0_dwn = pyramid_reduce(sig0, downscale=sc, cval=sig0.min())
+                sig1_dwn = pyramid_reduce(sig1, downscale=sc, cval=sig1.min())
+            else:
+                sig0_dwn = sig0
+                sig1_dwn = sig1
+
+            # Set the initial transport map for this scale.
+            # If this is the 1st scale, f_init=None (i.e. f=x), else, f_init is
+            # upsampled from previous scale
+            f_init = None
+            if i > 0:
+                f0 = resize(2*self.transport_map_[-1][0], sig0_dwn.shape,
+                            mode='edge')
+                f1 = resize(2*self.transport_map_[-1][1], sig0_dwn.shape,
+                            mode='edge')
+                f_init = np.stack((f0,f1))
+
+            # Compute forward VOT transform for this scale
+            vot = VOT2D(**par)
+            lot = vot.forward(sig0_dwn, sig1_dwn, f_init=f_init)
+
+            # Update attributes/metrics
+            self.transport_map_.append(vot.transport_map_)
+            self.displacements_.append(vot.displacements_)
+            self.cost_.append(vot.cost_)
+            self.mse_.append(vot.mse_)
+            self.curl_.append(vot.curl_)
+
+        return lot
