@@ -117,8 +117,6 @@ class RadonCDT(BaseTransform):
             Forward transport map.
         sig1 : 2d array, shape (height, width)
             Signal to transform.
-        theta : array (default=np.arange(180))
-            Radon transform projection angles.
 
         Returns
         -------
