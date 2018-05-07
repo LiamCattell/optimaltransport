@@ -56,6 +56,7 @@ class VOT2D(BaseTransform):
         self.max_iter = max_iter
         self.tol = tol
         self.verbose = verbose
+        return
 
 
     def forward(self, sig0, sig1, f_init=None):

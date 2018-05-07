@@ -32,10 +32,23 @@ class BaseTransform(object):
 
     def inverse(self):
         """
-        Placeholder for inverse transform.
-        Subclasses should implement this method!
+        Inverse transform.
+
+        Returns
+        -------
+        sig1_recon : array, shape (height, width)
+            Reconstructed signal sig1.
         """
-        raise NotImplementedError
+        self._check_is_fitted()
+        return self.apply_inverse_map(self.transport_map_, self.sig0_)
+
+
+    # def inverse(self):
+    #     """
+    #     Placeholder for inverse transform.
+    #     Subclasses should implement this method!
+    #     """
+    #     raise NotImplementedError
 
 
     def apply_forward_map(self):
