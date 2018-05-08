@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import warnings
 
+from mpl_toolkits.mplot3d import Axes3D
+
 from ..utils import check_decomposition, check_array
 from ..decomposition import get_mode_variation, get_mode_histogram
 from ..continuous import BaseTransform
@@ -339,3 +341,50 @@ def plot_mode_image(pipeline, component=0, shape=None, transform=None,
 
 def plot_mode_histogram_image():
     return
+
+
+def plot_displacements2d(displacements, ax=None, scale=1., count=50):
+    """
+    Plot 2D pixel displacements as a wireframe grid.
+
+    Parameters
+    ----------
+    displacements : array, shape (2, height, width)
+        Pixel displacements. First index denotes direction: displacements[0] is
+        y-displacements, and displacements[1] is x-displacements.
+    ax : matplotlib.axes.Axes object or None (default=None)
+        Axes in which to plot the wireframe. If None, a new figure is created.
+    scale : float (default=1.)
+        Exaggeration scale applied to the displacements before visualization.
+    count : int (default=50)
+        Use at most this many rows and columns in the wireframe.
+
+    Returns
+    -------
+    ax : matplotlib.axes.Axes object
+        Axes object.
+    """
+    # Check input
+    displacements = check_array(displacements, ndim=3)
+
+    # Create regular grid
+    h, w = displacements.shape[1:]
+    xv, yv = np.meshgrid(np.arange(w), np.arange(h))
+    z = np.zeros((h,w))
+
+    # If necessary, initialise figure
+    fig = None
+    if ax is None:
+        fig = plt.figure()
+        ax = fig.gca(projection='3d')
+
+    # Plot wireframe grid
+    ax.plot_wireframe(xv+scale*displacements[1], yv+scale*displacements[0], z,
+                      rcount=count, ccount=count)
+
+    # Format axes
+    ax.view_init(elev=90, azim=90)
+    ax.set_aspect('equal')
+    ax.set_axis_off()
+
+    return ax

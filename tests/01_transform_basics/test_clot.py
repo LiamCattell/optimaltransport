@@ -3,8 +3,6 @@ sys.path.append('../../../optimaltransport')
 
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.io import loadmat
-from scipy.ndimage import gaussian_filter
 
 from optrans.continuous import CLOT
 from optrans.datasets import adni
@@ -22,19 +20,10 @@ sigma = 1.
 epsilon = 8.
 total = 100.
 
-# img1 = np.zeros((n,n))
-# img1[n//2,n//2] = 1.
-# img0 = np.ones_like(img1)
-
 # Load images
 X, _ = adni.load_data()
 img0 = adni.load_img0()
 img1 = X[1]
-
-# data = loadmat("C:/Users/lcc3d/Documents/MATLAB/cmu_code/ContinuousLOT/ContinuousLOT/Data/FaceSamples.mat")
-# # data = loadmat("C:/Users/lcc3d/Documents/MATLAB/cmu_code/ContinuousLOT/ContinuousLOT/Data/FaceNormalized.mat")
-# img0 = data['I'][0][0].astype(np.float)
-# img1 = data['I'][0][1].astype(np.float)
 
 # CLOT is *very* sensitive to the image normalization
 img0 = signal_to_pdf(img0, sigma=sigma, epsilon=epsilon, total=total)
