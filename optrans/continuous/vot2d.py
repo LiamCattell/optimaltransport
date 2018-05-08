@@ -8,7 +8,10 @@ from ..utils import signal_to_pdf, interp2d, griddata2d
 
 class VOT2D(BaseTransform):
     """
-    Variational Optimal Transport Transform.
+    Variational Optimal Transport 2D Transform.
+
+    Note: Unlike the original paper by Kundu et al., this implementation uses
+    the Adam gradient descent optimizer.
 
     Parameters
     ----------
@@ -44,6 +47,14 @@ class VOT2D(BaseTransform):
         Mean squared error at each iteration.
     curl_ : list of float
         Curl at each iteration.
+
+    References
+    ----------
+    [Discovery and visualization of structural biomarkers from MRI using
+    transport-based morphometry]
+    (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5912801/)
+    [Adam - A method for stochastic optimization]
+    (http://arxiv.org/abs/1412.6980v8)
     """
     def __init__(self, alpha=0.01, lr=0.01, beta1=0.9, beta2=0.999, decay=0.,
                  max_iter=300, tol=0.001, verbose=0):
@@ -291,7 +302,10 @@ class VOT2D(BaseTransform):
 
 class MultiVOT2D(VOT2D):
     """
-    Multi-Scale Variational Optimal Transport Transform.
+    Multi-Scale Variational Optimal Transport 2D Transform.
+
+    Note: Unlike the original paper by Kundu et al., this implementation uses
+    the Adam gradient descent optimizer.
 
     Parameters
     ----------
@@ -352,6 +366,14 @@ class MultiVOT2D(VOT2D):
         Mean squared error at all scales.
     curl_all_ : list of float
         Curl at all scales.
+
+    References
+    ----------
+    [Discovery and visualization of structural biomarkers from MRI using
+    transport-based morphometry]
+    (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5912801/)
+    [Adam - A method for stochastic optimization]
+    (http://arxiv.org/abs/1412.6980v8)
     """
     def __init__(self, n_scales=3, **kwargs):
         super(MultiVOT2D, self).__init__()

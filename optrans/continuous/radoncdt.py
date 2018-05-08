@@ -22,6 +22,12 @@ class RadonCDT(BaseTransform):
         Displacements u.
     transport_map_ : array, shape (t, len(theta))
         Transport map f.
+
+    References
+    ----------
+    [The Radon cumulative distribution transform and its application to image
+    classification]
+    (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4871726/)
     """
     def __init__(self, theta=np.arange(180)):
         super(RadonCDT, self).__init__()

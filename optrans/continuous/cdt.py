@@ -17,6 +17,11 @@ class CDT(BaseTransform):
         Displacements u.
     transport_map_ : 1d array
         Transport map f.
+
+    References
+    ----------
+    [The cumulative distribution transform and linear pattern classification]
+    (https://arxiv.org/abs/1507.05936)
     """
     def __init__(self):
         super(CDT, self).__init__()

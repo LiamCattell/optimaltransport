@@ -9,6 +9,53 @@ from ..utils import signal_to_pdf, interp2d, griddata2d
 
 
 class CLOT(BaseTransform):
+    """
+    Continuous Linear Optimal Transport Transform.
+
+    This uses Nesterov's accelerated gradient descent to remove the curl in the
+    initial mapping.
+
+    Parameters
+    ----------
+    lr : float (default=0.01)
+        Learning rate.
+    momentum : float (default=0.)
+        Nesterov accelerated gradient descent momentum.
+    decay : float (default=0.)
+        Learning rate decay over each update.
+    max_iter : int (default=300)
+        Maximum number of iterations.
+    tol : float (default=0.001)
+        Stop iterating when change in cost function is below this threshold.
+    verbose : int (default=1)
+        Verbosity during optimization. 0=no output, 1=print cost,
+        2=print all metrics.
+
+    Attributes
+    -----------
+    displacements_ : array, shape (2, height, width)
+        Displacements u. First index denotes direction: displacements_[0] is
+        y-displacements, and displacements_[1] is x-displacements.
+    transport_map_ : array, shape (2, height, width)
+        Transport map f. First index denotes direction: transport_map_[0] is
+        y-map, and transport_map_[1] is x-map.
+    displacements_initial_ : array, shape (2, height, width)
+        Initial displacements computed using the method by Haker et al.
+    transport_map_initial_ : array, shape (2, height, width)
+        Initial transport map computed using the method by Haker et al.
+    cost_ : list of float
+        Value of cost function at each iteration.
+    curl_ : list of float
+        Curl at each iteration.
+
+    References
+    ----------
+    [A continuous linear optimal transport approach for pattern analysis in
+    image datasets]
+    (https://www.sciencedirect.com/science/article/pii/S0031320315003507)
+    [Optimal mass transport for registration and warping]
+    (https://link.springer.com/article/10.1023/B:VISI.0000036836.66311.97)
+    """
     def __init__(self, lr=0.01, momentum=0., decay=0., max_iter=300, tol=0.001,
                  verbose=0):
         super(CLOT, self).__init__()
@@ -22,6 +69,22 @@ class CLOT(BaseTransform):
 
 
     def forward(self, sig0, sig1):
+        """
+        Forward transform.
+
+        Parameters
+        ----------
+        sig0 : array, shape (height, width)
+            Reference image.
+        sig1 : array, shape (height, width)
+            Signal to transform.
+
+        Returns
+        -------
+        lot : array, shape (2, height, width)
+            LOT transform of input image sig1. First index denotes direction:
+            lot[0] is y-LOT, and lot[1] is x-LOT.
+        """
         # Check input arrays
         sig0 = check_array(sig0, ndim=2, dtype=[np.float64, np.float32],
                            force_strictly_positive=True)
@@ -97,6 +160,7 @@ class CLOT(BaseTransform):
             # Update transport map
             self.lr *= (1. / (1. + self.decay*i))
             update = self.momentum * update_prev + self.lr * ft
+            update_prev = np.copy(update)
             f -= update
 
             # If change in cost is below threshold, stop iterating
@@ -130,7 +194,7 @@ class CLOT(BaseTransform):
         ----------
         transport_map : array, shape (2, height, width)
             Forward transport map.
-        sig1 : 2d array, shape (height, width)
+        sig1 : array, shape (height, width)
             Signal to transform.
 
         Returns
@@ -191,6 +255,22 @@ class CLOT(BaseTransform):
 
 
     def _get_initial_map(self, sig0, sig1):
+        """
+        Get initial transport map using the method by Haker et al.
+
+        Parameters
+        ----------
+        sig0 : array, shape (height, width)
+            Reference image.
+        sig1 : array, shape (height, width)
+            Signal to transform.
+
+        Returns
+        -------
+        f_init : array, shape (2, height, width)
+            Initial transport map. First index denotes direction: f_init[0] is
+            y-map, and f_init[1] is x-map.
+        """
         # Create regular grid
         h, w = sig0.shape
         xv, yv = np.meshgrid(np.arange(w,dtype=float), np.arange(h,dtype=float))
@@ -201,9 +281,6 @@ class CLOT(BaseTransform):
         # Integrate images along y-direction
         sum0 = signal_to_pdf(sig0.sum(axis=0))
         sum1 = signal_to_pdf(sig1.sum(axis=0))
-
-        # sum0 = sig0.sum(axis=0) / sig0.sum()
-        # sum1 = sig1.sum(axis=0) / sig1.sum()
 
         # Compute mass-preserving mapping between the two integrals
         cdt = CDT()
