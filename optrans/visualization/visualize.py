@@ -383,7 +383,7 @@ def plot_displacements2d(displacements, ax=None, scale=1., count=50):
                       rcount=count, ccount=count)
 
     # Format axes
-    ax.view_init(elev=90, azim=90)
+    ax.view_init(elev=-90, azim=-90)
     ax.set_aspect('equal')
     ax.set_axis_off()
 
