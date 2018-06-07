@@ -2,17 +2,14 @@ import numpy as np
 from skimage.transform import pyramid_reduce, pyramid_expand, resize
 from scipy.ndimage import gaussian_filter
 
-from .base import BaseTransform
+from .base import BaseTransform, BaseMapper2D
 from ..utils import check_array, assert_equal_shape
 from ..utils import signal_to_pdf, interp2d, griddata2d
 
 
-class SPOT2D(BaseTransform):
+class SPOT2D(BaseMapper2D):
     """
-    Variational Optimal Transport 2D Transform.
-
-    Note: Unlike the original paper by Kundu et al., this implementation uses
-    the Adam gradient descent optimizer.
+    Single-Potential Optimal Transport 2D Transform.
 
     Parameters
     ----------
@@ -51,9 +48,8 @@ class SPOT2D(BaseTransform):
 
     References
     ----------
-    [Discovery and visualization of structural biomarkers from MRI using
-    transport-based morphometry]
-    (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5912801/)
+    [Transport-based pattern theory: A signal transformation approach]
+    (https://arxiv.org/abs/1802.07163)
     [Adam - A method for stochastic optimization]
     (http://arxiv.org/abs/1412.6980v8)
     """
@@ -216,15 +212,15 @@ class SPOT2D(BaseTransform):
         return self.apply_inverse_potential(self.transport_map_, self.sig0_)
 
 
-    def apply_forward_map(self, transport_map, sig1):
+    def apply_forward_potential(self, potential, sig1, sigma):
         """
-        Appy forward transport map.
+        Appy forward transport map derived from potential.
 
         Parameters
         ----------
-        transport_map : array, shape (2, height, width)
-            Forward transport map.
-        sig1 : 2d array, shape (height, width)
+        potential : array, shape (height, width)
+            Potential.
+        sig1 : array, shape (height, width)
             Signal to transform.
 
         Returns
@@ -232,59 +228,6 @@ class SPOT2D(BaseTransform):
         sig0_recon : array, shape (height, width)
             Reconstructed reference signal sig0.
         """
-        # Check inputs
-        transport_map = check_array(transport_map, ndim=3,
-                                    dtype=[np.float64, np.float32])
-        sig1 = check_array(sig1, ndim=2, dtype=[np.float64, np.float32],
-                           force_strictly_positive=True)
-        assert_equal_shape(transport_map[0], sig1, ['transport_map', 'sig1'])
-
-        # Jacobian and its determinant
-        f0y, f0x = np.gradient(transport_map[0])
-        f1y, f1x = np.gradient(transport_map[1])
-        detJ = (f1x * f0y) - (f1y * f0x)
-
-        # Reconstruct sig0
-        sig0_recon = detJ * interp2d(sig1, transport_map, fill_value=sig1.min())
-
-        return sig0_recon
-
-
-    def apply_inverse_map(self, transport_map, sig0):
-        """
-        Appy inverse transport map.
-
-        Parameters
-        ----------
-        transport_map : array, shape (2, height, width)
-            Forward transport map. Inverse is computed in this function.
-        sig0 : array, shape (height, width)
-            Reference signal.
-
-        Returns
-        -------
-        sig1_recon : array, shape (height, width)
-            Reconstructed signal sig1.
-        """
-        # Check inputs
-        transport_map = check_array(transport_map, ndim=3,
-                                    dtype=[np.float64, np.float32])
-        sig0 = check_array(sig0, ndim=2, dtype=[np.float64, np.float32],
-                           force_strictly_positive=True)
-        assert_equal_shape(transport_map[0], sig0, ['transport_map', 'sig0'])
-
-        # Jacobian and its determinant
-        f0y, f0x = np.gradient(transport_map[0])
-        f1y, f1x = np.gradient(transport_map[1])
-        detJ = (f1x * f0y) - (f1y * f0x)
-
-        # Let's hope there are no NaNs/Infs in sig0/detJ
-        sig1_recon = griddata2d(sig0/detJ, transport_map, fill_value=sig0.min())
-
-        return sig1_recon
-
-
-    def apply_forward_potential(self, potential, sig1, sigma):
         # Check inputs
         potential = check_array(potential, ndim=2,
                                 dtype=[np.float64, np.float32])
@@ -315,6 +258,21 @@ class SPOT2D(BaseTransform):
 
 
     def apply_inverse_potential(self, potential, sig0, sigma):
+        """
+        Appy inverse transport map derived from potential.
+
+        Parameters
+        ----------
+        potential : array, shape (height, width)
+            Potential. Inverse transport map is computed in this function.
+        sig0 : array, shape (height, width)
+            Reference signal.
+
+        Returns
+        -------
+        sig1_recon : array, shape (height, width)
+            Reconstructed signal sig1.
+        """
         # Check inputs
         potential = check_array(potential, ndim=2,
                                 dtype=[np.float64, np.float32])

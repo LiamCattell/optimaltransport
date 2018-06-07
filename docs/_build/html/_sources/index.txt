@@ -9,9 +9,11 @@ Welcome to optimaltransport's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    continuous
+   decomposition
+   utils
 
 
 

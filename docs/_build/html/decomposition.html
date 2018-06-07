@@ -1,0 +1,779 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Decomposition module &#8212; optimaltransport 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="top" title="optimaltransport 1.0 documentation" href="index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">optimaltransport 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/decomposition.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="decomposition-module">
+<h1>Decomposition module<a class="headerlink" href="#decomposition-module" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-optrans.decomposition"></span><dl class="class">
+<dt id="optrans.decomposition.CCA">
+<em class="property">class </em><code class="descclassname">optrans.decomposition.</code><code class="descname">CCA</code><span class="sig-paren">(</span><em>n_components=1</em>, <em>scale=True</em>, <em>max_iter=500</em>, <em>tol=1e-06</em>, <em>copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.decomposition.CCA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Canonical Correlation Analysis.</p>
+<p>This is a wrapper for scikit-learn&#8217;s CCA class, which allows it to be used
+in a similar manner to PLDA and PCA.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_components</strong> : int (default=1)</p>
+<blockquote>
+<div><p>Number of components to keep.</p>
+</div></blockquote>
+<p><strong>scale</strong> : bool (default=True)</p>
+<blockquote>
+<div><p>Whether to scale the data?</p>
+</div></blockquote>
+<p><strong>max_iter</strong> : int (default=500)</p>
+<blockquote>
+<div><p>The maximum number of iterations of the NIPALS inner loop.</p>
+</div></blockquote>
+<p><strong>tol</strong> : float (default=1e-6)</p>
+<blockquote>
+<div><p>The tolerance used in the iterative algorithm.</p>
+</div></blockquote>
+<p><strong>copy</strong> : bool (default=True)</p>
+<blockquote class="last">
+<div><p>Whether the deflation be done on a copy. Let the default value to True
+unless you don’t care about side effects.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<p>[scikit-learn&#8217;s documentation on CCA]
+(<a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cross_decomposition.CCA.html">http://scikit-learn.org/stable/modules/generated/sklearn.cross_decomposition.CCA.html</a>)
+Jacob A. Wegelin. A survey of Partial Least Squares (PLS) methods, with
+emphasis on the two-block case. Technical Report 371, Department of
+Statistics, University of Washington, Seattle, 2000.</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="84%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a href="#id1"><span class="problematic" id="id2">components_</span></a></td>
+<td>(array, shape (n_components, n_features)) X block weights vectors.</td>
+</tr>
+<tr class="row-even"><td><a href="#id3"><span class="problematic" id="id4">components_y_</span></a></td>
+<td>(array, shape (n_components, n_targets)) Y block weights vectors.</td>
+</tr>
+<tr class="row-odd"><td><a href="#id5"><span class="problematic" id="id6">explained_variance_</span></a></td>
+<td>(array, shape (n_components,)) The amount of variance explained by each of the selected weights for the X data.</td>
+</tr>
+<tr class="row-even"><td><a href="#id7"><span class="problematic" id="id8">explained_variance_y_</span></a></td>
+<td>(array, shape (n_components,)) The amount of variance explained by each of the selected weights for the Y data.</td>
+</tr>
+<tr class="row-odd"><td><a href="#id9"><span class="problematic" id="id10">mean_</span></a></td>
+<td>(array, shape (n_features,)) Per-feature empirical mean of X, estimated from the training set.</td>
+</tr>
+<tr class="row-even"><td><a href="#id11"><span class="problematic" id="id12">mean_y_</span></a></td>
+<td>(array, shape (n_targets,)) Per-feature empirical mean of Y, estimated from the training set.</td>
+</tr>
+<tr class="row-odd"><td><a href="#id13"><span class="problematic" id="id14">n_components_</span></a></td>
+<td>(int) The number of components.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="optrans.decomposition.CCA.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>Y</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.decomposition.CCA.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit model to data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>Training vectors, where n_samples is the number of samples and
+n_features is the number of predictors.</p>
+</div></blockquote>
+<p><strong>Y</strong> : array, shape (n_samples, n_targets)</p>
+<blockquote class="last">
+<div><p>Target vectors, where n_samples is the number of samples and
+n_targets is the number of response variables.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.decomposition.CCA.fit_transform">
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>Y</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.decomposition.CCA.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Learn and apply the dimension reduction on the train data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>Training vectors, where n_samples is the number of samples and
+n_features is the number of predictors.</p>
+</div></blockquote>
+<p><strong>Y</strong> : array, shape (n_samples, n_targets)</p>
+<blockquote>
+<div><p>Target vectors, where n_samples is the number of samples and
+n_targets is the number of response variables.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X_new</strong> : array, shape (n_samples, n_components)</p>
+<blockquote>
+<div><p>Transformed X data.</p>
+</div></blockquote>
+<p><strong>Y_new</strong> : array, shape (n_samples, n_components)</p>
+<blockquote class="last">
+<div><p>Transformed Y data.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.decomposition.CCA.inverse_transform">
+<code class="descname">inverse_transform</code><span class="sig-paren">(</span><em>X</em>, <em>Y=None</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.decomposition.CCA.inverse_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform data back to its original space.</p>
+<p>Note: This is not exact!</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_components)</p>
+<blockquote>
+<div><p>Transformed X data.</p>
+</div></blockquote>
+<p><strong>Y</strong> : array, shape (n_samples, n_components) or None (default=None)</p>
+<blockquote>
+<div><p>Transformed Y data. If Y=None, only the X data are transformed back
+to the original space.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X_original</strong> : array, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>X data transformed back into original space.</p>
+</div></blockquote>
+<p><strong>Y_original</strong> : array, shape (n_samples, n_targets)</p>
+<blockquote class="last">
+<div><p>Y data transformed back into original space. If Y=None, only
+X_original is returned.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.decomposition.CCA.score">
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>Y</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.decomposition.CCA.score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return Pearson product-moment correlation coefficients for each
+component.</p>
+<p>The values of R are between -1 and 1, inclusive.</p>
+<p>Note: This is different from sklearn.cross_decomposition.CCA.score(),
+which returns the coefficient of determination of the prediction.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>Input X data.</p>
+</div></blockquote>
+<p><strong>Y</strong> : array, shape (n_samples, n_targets) or None (default=None)</p>
+<blockquote>
+<div><p>Input Y data.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>score</strong> : float or array, shape (n_components,)</p>
+<blockquote class="last">
+<div><p>Pearson product-moment correlation coefficients. If n_components=1,
+a single value is returned, else an array of correlation
+coefficients is returned.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.decomposition.CCA.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em>, <em>Y=None</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.decomposition.CCA.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply the dimension reduction learned on the train data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>Input X data.</p>
+</div></blockquote>
+<p><strong>Y</strong> : array, shape (n_samples, n_targets) or None (default=None)</p>
+<blockquote>
+<div><p>Input Y data. If Y=None, then only the transformed X data are
+returned.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X_new</strong> : array, shape (n_samples, n_components)</p>
+<blockquote>
+<div><p>Transformed X data.</p>
+</div></blockquote>
+<p><strong>Y_new</strong> : array, shape (n_samples, n_components)</p>
+<blockquote class="last">
+<div><p>Transformed Y data. If Y=None, only X_new is returned.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="optrans.decomposition.PLDA">
+<em class="property">class </em><code class="descclassname">optrans.decomposition.</code><code class="descname">PLDA</code><span class="sig-paren">(</span><em>alpha=1.0</em>, <em>n_components=None</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.decomposition.PLDA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Penalized Linear Discriminant Analysis.</p>
+<p>This is both a dimensionality reduction method and a linear classifier.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>alpha</strong> : scalar (default=1.)</p>
+<blockquote>
+<div><p>Parameter that controls the proportion of LDA vs PCA.
+If alpha=0, PLDA functions like LDA. If alpha is large, PLDA functions
+more like PCA.</p>
+</div></blockquote>
+<p><strong>n_components</strong> : int or None (default=None)</p>
+<blockquote class="last">
+<div><p>Number of components to keep. If n_components is not set, all
+components are kept: n_components == min(n_samples, n_features).</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<p>W. Wang et al. Penalized Fisher Discriminant Analysis and its Application
+to Image-Based Morphometry. Pattern Recognit. Lett., 32(15):2128-35, 2011</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a href="#id15"><span class="problematic" id="id16">components_</span></a></td>
+<td>(array, shape (n_components, n_features)) Axes in the feature space. The components are sorted by the explained variance.</td>
+</tr>
+<tr class="row-even"><td><a href="#id17"><span class="problematic" id="id18">explained_variance_</span></a></td>
+<td>(array, shape (n_components,)) The amount of variance explained by each of the selected components.</td>
+</tr>
+<tr class="row-odd"><td><a href="#id19"><span class="problematic" id="id20">explained_variance_ratio_</span></a></td>
+<td>(array, shape(n_components,)) Proportion of variance explained by each of the selected components. If n_components is not set then all components are stored and the sum of explained variance ratios is equal to 1.0.</td>
+</tr>
+<tr class="row-even"><td><a href="#id21"><span class="problematic" id="id22">mean_</span></a></td>
+<td>(array, shape (n_features,)) Per-feature empirical mean, estimated from the training set.</td>
+</tr>
+<tr class="row-odd"><td><a href="#id23"><span class="problematic" id="id24">n_components_</span></a></td>
+<td>(int) The number of components.</td>
+</tr>
+<tr class="row-even"><td><a href="#id25"><span class="problematic" id="id26">coef_</span></a></td>
+<td>(array, shape (n_features,) or (n_classes, n_features)) Weight vector(s).</td>
+</tr>
+<tr class="row-odd"><td><a href="#id27"><span class="problematic" id="id28">intercept_</span></a></td>
+<td>(array, shape (n_features,)) Intercept term.</td>
+</tr>
+<tr class="row-even"><td><a href="#id29"><span class="problematic" id="id30">class_means_</span></a></td>
+<td>(array, shape (n_classes, n_features)) Class means, estimated from the training set.</td>
+</tr>
+<tr class="row-odd"><td><a href="#id31"><span class="problematic" id="id32">classes_</span></a></td>
+<td>(array, shape (n_classes,)) Unique class labels.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="optrans.decomposition.PLDA.decision_function">
+<code class="descname">decision_function</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.decomposition.PLDA.decision_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict confidence scores for samples.</p>
+<p>The confidence score for a sample is the signed distance of that
+sample to the hyperplane.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>Input data.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>scores</strong> : array, shape=(n_samples,) if n_classes == 2</p>
+<blockquote class="last">
+<div><blockquote>
+<div><p>else (n_samples, n_classes)</p>
+</div></blockquote>
+<p>Confidence scores per (sample, class) combination. In the binary
+case, confidence score for self.classes_[1] where &gt;0 means this
+class would be predicted.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.decomposition.PLDA.fit">
+<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.decomposition.PLDA.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit PLDA model according to the given training data and parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>Training data.</p>
+</div></blockquote>
+<p><strong>y</strong> : array, shape (n_samples,)</p>
+<blockquote class="last">
+<div><p>Target values.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.decomposition.PLDA.fit_transform">
+<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.decomposition.PLDA.fit_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit the model with X and transform X.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>Training data.</p>
+</div></blockquote>
+<p><strong>y</strong> : array, shape (n_samples,)</p>
+<blockquote>
+<div><p>Target values.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X_new</strong> : array, shape (n_samples, n_components)</p>
+<blockquote class="last">
+<div><p>Transformed data.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.decomposition.PLDA.inverse_transform">
+<code class="descname">inverse_transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.decomposition.PLDA.inverse_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform data back to its original space.</p>
+<p>Note: If n_components is less than the maximum, information will be
+lost, so reconstructed data will not exactly match the original data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array shape (n_samples, n_components)</p>
+<blockquote>
+<div><p>New data.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X_original</strong> : array, shape (n_samples, n_features)</p>
+<blockquote class="last">
+<div><p>Data transformed back into original space.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.decomposition.PLDA.predict">
+<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.decomposition.PLDA.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict class labels for samples in X.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>Input data.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>C</strong> : array, shape (n_samples,)</p>
+<blockquote class="last">
+<div><p>Predicted class label per sample.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.decomposition.PLDA.predict_log_proba">
+<code class="descname">predict_log_proba</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.decomposition.PLDA.predict_log_proba" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimate log probability.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>Input data.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>C</strong> : array, shape (n_samples, n_classes)</p>
+<blockquote class="last">
+<div><p>Estimated log probabilities.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.decomposition.PLDA.predict_proba">
+<code class="descname">predict_proba</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.decomposition.PLDA.predict_proba" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimate probability.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>Input data.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>C</strong> : array, shape (n_samples, n_classes)</p>
+<blockquote class="last">
+<div><p>Estimated probabilities.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.decomposition.PLDA.predict_transformed">
+<code class="descname">predict_transformed</code><span class="sig-paren">(</span><em>X_trans</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.decomposition.PLDA.predict_transformed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Predict class labels for data that have already been transformed by
+self.transform(X).</p>
+<p>This is useful for plotting classification boundaries.
+Note: Due to arithemtic discrepancies, this may return slightly
+different class labels to self.predict(X).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X_trans</strong> : array, shape (n_samples, n_components)</p>
+<blockquote>
+<div><p>Test samples that have already been transformed into PLDA space.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>y</strong> : array, shape (n_samples,)</p>
+<blockquote class="last">
+<div><p>Predicted class labels for X_trans.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.decomposition.PLDA.score">
+<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.decomposition.PLDA.score" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the mean accuracy on the given test data and labels.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>Test samples.</p>
+</div></blockquote>
+<p><strong>y</strong> : array, shape (n_samples,)</p>
+<blockquote>
+<div><p>True labels for X.</p>
+</div></blockquote>
+<p><strong>sample_weight</strong> : array, shape (n_samples,), optional</p>
+<blockquote>
+<div><p>Sample weights.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>score</strong> : float</p>
+<blockquote class="last">
+<div><p>Mean accuracy of self.predict(X) w.r.t. y.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.decomposition.PLDA.transform">
+<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.decomposition.PLDA.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_features)</p>
+<blockquote>
+<div><p>Input data.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X_new</strong> : array, shape (n_samples, n_components)</p>
+<blockquote class="last">
+<div><p>Transformed data.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="optrans.decomposition.get_mode_variation">
+<code class="descclassname">optrans.decomposition.</code><code class="descname">get_mode_variation</code><span class="sig-paren">(</span><em>decomp</em>, <em>component=0</em>, <em>n_std=3.0</em>, <em>n_steps=5</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.decomposition.get_mode_variation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the mode of variation along a given direction through the data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>decomp</strong> : object</p>
+<blockquote>
+<div><p>A trained PCA or PLDA object.</p>
+</div></blockquote>
+<p><strong>component</strong> : int (default=0.)</p>
+<blockquote>
+<div><p>Index of the desired component.</p>
+</div></blockquote>
+<p><strong>n_std</strong> : float (default=3.)</p>
+<blockquote>
+<div><p>Range of standard deviations along the direction. For example if
+n_std=3, the returned data will correspond to the range -1.5*std to
++1.5*std</p>
+</div></blockquote>
+<p><strong>n_steps</strong> : int (default=5)</p>
+<blockquote>
+<div><p>Number of steps along the direction.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>mode</strong> : array, shape (n_steps, n_features)</p>
+<blockquote class="last">
+<div><p>Reconstructed data along desired direction.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="optrans.decomposition.get_mode_histogram">
+<code class="descclassname">optrans.decomposition.</code><code class="descname">get_mode_histogram</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>component=0</em>, <em>n_bins=10</em>, <em>rng=None</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.decomposition.get_mode_histogram" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the normalized histogram of the data projected on to a given
+component.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_components)</p>
+<blockquote>
+<div><p>Data.</p>
+</div></blockquote>
+<p><strong>y</strong> : array, shape (n_samples,) or None</p>
+<blockquote>
+<div><p>Class labels. If class labels are provided, this function will compute
+a separate histogram for each class.</p>
+</div></blockquote>
+<p><strong>component</strong> : int (default=0)</p>
+<blockquote>
+<div><p>Index of the desired component.</p>
+</div></blockquote>
+<p><strong>n_bins</strong> : int (default=10)</p>
+<blockquote>
+<div><p>Number of histogram bins.</p>
+</div></blockquote>
+<p><strong>rng</strong> : (float, float) or None</p>
+<blockquote>
+<div><p>The lower and upper range of the bins. If not provided, rng is simply
+(X.min(), X.max()). The first element of the range must be less than or
+equal to the second.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>hist</strong> : array, shape (n_bins,) or list of arrays, length (n_classes)</p>
+<blockquote>
+<div><p>The normalized values of the histogram. If class labels are provided,
+hist is a list of arrays (one for each class).</p>
+</div></blockquote>
+<p><strong>bin_centers</strong> : array, shape (n_bins,)</p>
+<blockquote class="last">
+<div><p>Histogram bin centers. The bin centers are the same for all classes.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="optrans.decomposition.fit_line">
+<code class="descclassname">optrans.decomposition.</code><code class="descname">fit_line</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.decomposition.fit_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit a straight line to points (x, y) using least squares.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x, y</strong> : array_like, shape (M,)</p>
+<blockquote>
+<div><p>x- and y-coordinates of the M sample points.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>xl</strong> : array, shape (2,)</p>
+<blockquote>
+<div><p>Most extreme x-coordinates (i.e. [min(x), max(x)]).</p>
+</div></blockquote>
+<p><strong>yl</strong> : array, shape (2,)</p>
+<blockquote class="last">
+<div><p>y-coordinates of the line passing through x_ends.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">optimaltransport 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Liam Cattell.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

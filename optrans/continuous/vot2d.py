@@ -10,8 +10,10 @@ class VOT2D(BaseTransform):
     """
     Variational Optimal Transport 2D Transform.
 
-    Note: Unlike the original paper by Kundu et al., this implementation uses
-    the Adam gradient descent optimizer.
+    .. note::
+
+    Unlike the original paper by Kundu et al., this implementation uses the
+    Adam gradient descent optimizer.
 
     Parameters
     ----------
@@ -55,6 +57,10 @@ class VOT2D(BaseTransform):
     (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5912801/)
     [Adam - A method for stochastic optimization]
     (http://arxiv.org/abs/1412.6980v8)
+
+    .. seealso::
+
+    MultiVOT2D
     """
     def __init__(self, alpha=0.01, lr=0.01, beta1=0.9, beta2=0.999, decay=0.,
                  max_iter=300, tol=0.001, verbose=0):
@@ -304,8 +310,10 @@ class MultiVOT2D(VOT2D):
     """
     Multi-Scale Variational Optimal Transport 2D Transform.
 
-    Note: Unlike the original paper by Kundu et al., this implementation uses
-    the Adam gradient descent optimizer.
+    .. note::
+
+    Unlike the original paper by Kundu et al., this implementation uses the
+    Adam gradient descent optimizer.
 
     Parameters
     ----------

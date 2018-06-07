@@ -1,0 +1,341 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Utils module &#8212; optimaltransport 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="top" title="optimaltransport 1.0 documentation" href="index.html" />
+    <link rel="prev" title="Continuous module" href="continuous.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="continuous.html" title="Continuous module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">optimaltransport 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="continuous.html"
+                        title="previous chapter">Continuous module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/utils.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-optrans.utils">
+<span id="utils-module"></span><h1>Utils module<a class="headerlink" href="#module-optrans.utils" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="optrans.utils.signal_to_pdf">
+<code class="descclassname">optrans.utils.</code><code class="descname">signal_to_pdf</code><span class="sig-paren">(</span><em>input</em>, <em>sigma=0.0</em>, <em>epsilon=1e-08</em>, <em>total=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.utils.signal_to_pdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the (smoothed) probability density function of a signal.</p>
+<p>Performs the following operations:
+1. Smooth sigma with a Gaussian filter
+2. Normalize signal such that it sums to 1
+3. Add epsilon to ensure signal is strictly positive
+4. Re-normalize signal such that it sums to total</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>input</strong> : ndarray</p>
+<blockquote>
+<div><p>Input array</p>
+</div></blockquote>
+<p><strong>sigma</strong> : scalar</p>
+<blockquote>
+<div><p>Standard deviation for Gaussian kernel. The standard deviations of the
+Gaussian filter are given for each axis as a sequence, or as a single
+number, in which case it is equal for all axes.</p>
+</div></blockquote>
+<p><strong>epsilon</strong> : scalar</p>
+<blockquote>
+<div><p>Offset to ensure that signal is strictly positive.</p>
+</div></blockquote>
+<p><strong>total</strong> : scalar</p>
+<blockquote>
+<div><p>Value of the signal summation.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>pdf</strong> : ndarray</p>
+<blockquote class="last">
+<div><p>Returned array of same shape as input</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="optrans.utils.match_shape2d">
+<code class="descclassname">optrans.utils.</code><code class="descname">match_shape2d</code><span class="sig-paren">(</span><em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.utils.match_shape2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Crop array B such that it matches the shape of A.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>a</strong> : 2d array</p>
+<blockquote>
+<div><p>Array of desired size.</p>
+</div></blockquote>
+<p><strong>b</strong> : 2d array</p>
+<blockquote>
+<div><p>Array to crop. Shape must be larger than (or equal to) the shape
+of array a.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>b_crop</strong> : 2d array</p>
+<blockquote class="last">
+<div><p>Cropped version of b, with the same shape as a.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="optrans.utils.interp2d">
+<code class="descclassname">optrans.utils.</code><code class="descname">interp2d</code><span class="sig-paren">(</span><em>img</em>, <em>f</em>, <em>order=1</em>, <em>fill_value=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.utils.interp2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpolation for 2D gridded data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>img</strong> : 2d array, shape (height, width)</p>
+<blockquote>
+<div><p>Image to interpolate. This function assumes a grid of sample points:
+x = 0:(width-1), y = 0:(height-1).</p>
+</div></blockquote>
+<p><strong>f</strong> : 3d array, shape (2, height, width)</p>
+<blockquote>
+<div><p>Coordinates of interpolated points. First dimension f[0] corresponds to
+y-coordinates, second dimension f[1] is x-coordinates.</p>
+</div></blockquote>
+<p><strong>order</strong> : int (default=1)</p>
+<blockquote>
+<div><p>Order of the spline interpolation. Must be in the range 0-5.</p>
+</div></blockquote>
+<p><strong>fill_value</strong> : float (default=0.)</p>
+<blockquote>
+<div><p>Value used for points outside the boundaries.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">out, 2d array, shape (height, width)</p>
+<blockquote class="last">
+<div><p>Image interpolated at points defined by f.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="optrans.utils.griddata2d">
+<code class="descclassname">optrans.utils.</code><code class="descname">griddata2d</code><span class="sig-paren">(</span><em>img</em>, <em>f</em>, <em>order=1</em>, <em>fill_value=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.utils.griddata2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interpolate 2d scattered data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>img</strong> : 2d array, shape (height, width)</p>
+<blockquote>
+<div><p>Image to interpolate.</p>
+</div></blockquote>
+<p><strong>f</strong> : 3d array, shape (2, height, width)</p>
+<blockquote>
+<div><p>Coordinates of at which img is defined. First dimension f[0] corresponds
+to y-coordinates, second dimension f[1] is x-coordinates.</p>
+</div></blockquote>
+<p><strong>order</strong> : int (default=1)</p>
+<blockquote>
+<div><p>Order of the interpolation. Must be in the range 0-2.</p>
+</div></blockquote>
+<p><strong>fill_value</strong> : float (default=0.)</p>
+<blockquote>
+<div><p>Value used for points outside the boundaries.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">out, 2d array, shape (height, width)</p>
+<blockquote class="last">
+<div><p>Image interpolated on to regular gird defined by: x = 0:(width-1),
+y = 0:(height-1).</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="optrans.utils.check_array">
+<code class="descclassname">optrans.utils.</code><code class="descname">check_array</code><span class="sig-paren">(</span><em>array</em>, <em>ndim=None</em>, <em>dtype='numeric'</em>, <em>force_all_finite=True</em>, <em>force_strictly_positive=False</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.utils.check_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Input validation on an array, list, or similar.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>array</strong> : object</p>
+<blockquote>
+<div><p>Input object to check/convert</p>
+</div></blockquote>
+<p><strong>ndim</strong> : int or None (default=None)</p>
+<blockquote>
+<div><p>Number of dimensions that array should have. If None, the dimensions
+are not checked</p>
+</div></blockquote>
+<p><strong>dtype</strong> : string, type, list of types or None (default=&#8217;numeric&#8217;)</p>
+<blockquote>
+<div><p>Data type of result. If None, the dtype of the input is preserved.
+If &#8216;numeric&#8217;, dtype is preserved unless array.dtype is object.
+If dtype is a list of types, conversion on the first type is only
+performed if the dtype of the input is not in the list.</p>
+</div></blockquote>
+<p><strong>force_all_finite</strong> : boolean (default=True)</p>
+<blockquote>
+<div><p>Whether to raise an error on np.inf and np.nan in array</p>
+</div></blockquote>
+<p><strong>force_strictly_positive</strong> : boolean (default=False)</p>
+<blockquote>
+<div><p>Whether to raise an error if any array elements are &lt;= 0</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>array_converted</strong> : object</p>
+<blockquote class="last">
+<div><p>The converted and validated array.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="optrans.utils.assert_equal_shape">
+<code class="descclassname">optrans.utils.</code><code class="descname">assert_equal_shape</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>names=None</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.utils.assert_equal_shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Throw a ValueError if a and b are not the same shape.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="optrans.utils.check_decomposition">
+<code class="descclassname">optrans.utils.</code><code class="descname">check_decomposition</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.utils.check_decomposition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check that an object is a PCA or PLDA (i.e. decomposition) object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>obj</strong> : object</p>
+<blockquote>
+<div><p>Object to check</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>mean</strong> : array, shape (n_features,)</p>
+<blockquote>
+<div><p>Mean of the data in the decomposition object</p>
+</div></blockquote>
+<p><strong>components</strong> : array, shape (n_components, n_features)</p>
+<blockquote>
+<div><p>Components learned by the decomposition object</p>
+</div></blockquote>
+<p><strong>std</strong> : array, shape (n_components,)</p>
+<blockquote class="last">
+<div><p>Standard deviation of the training data projected on to each component</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="continuous.html" title="Continuous module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">optimaltransport 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Liam Cattell.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>
