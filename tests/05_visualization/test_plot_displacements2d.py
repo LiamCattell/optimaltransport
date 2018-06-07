@@ -3,7 +3,6 @@ sys.path.append('../../../optimaltransport')
 
 import numpy as np
 import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
 
 from optrans.continuous import CLOT
 from optrans.utils import signal_to_pdf
@@ -22,7 +21,7 @@ total = 100.
 
 # Create sample images
 img1 = np.zeros((128,128))
-img1[32,64] = 1.
+img1[43,78] = 1.
 img0 = np.ones_like(img1)
 
 # CLOT is *very* sensitive to the image normalization
@@ -55,16 +54,24 @@ ax1[1,1].set_title("Image recon.")
 fig1.tight_layout()
 
 # Plot initial and final transport maps
-fig2 = plt.figure()
-ax2a = fig2.add_subplot(1, 3, 1)
-ax2a.imshow(clot.displacements_[0])
-ax2a.set_title("v")
-ax2b = fig2.add_subplot(1, 3, 2)
-ax2b.imshow(clot.displacements_[1])
-ax2b.set_title("u")
-ax2c = fig2.add_subplot(1, 3, 3, projection='3d')
-ax2c = plot_displacements2d(clot.displacements_, ax=ax2c, scale=5000, count=30)
-ax2c.dist = 6
-ax2c.set_title("Displacements")
+fig2, ax2 = plt.subplots(1, 3, sharex=True, sharey=True)
+ax2[0].imshow(clot.displacements_[0])
+ax2[1].imshow(clot.displacements_[1])
+plot_displacements2d(clot.displacements_, ax2[2], scale=5000., count=30)
 fig2.tight_layout()
 plt.show()
+
+# # Plot initial and final transport maps
+# fig2 = plt.figure()
+# ax2a = fig2.add_subplot(1, 3, 1)
+# ax2a.imshow(clot.displacements_[0])
+# ax2a.set_title("v")
+# ax2b = fig2.add_subplot(1, 3, 2)
+# ax2b.imshow(clot.displacements_[1])
+# ax2b.set_title("u")
+# ax2c = fig2.add_subplot(1, 3, 3, projection='3d')
+# ax2c = plot_displacements2d(clot.displacements_, ax=ax2c, scale=5000, count=30)
+# ax2c.dist = 6
+# ax2c.set_title("Displacements")
+# fig2.tight_layout()
+# plt.show()

@@ -343,15 +343,15 @@ def plot_mode_histogram_image():
     return
 
 
-def plot_displacements2d(displacements, ax=None, scale=1., count=50):
+def plot_displacements2d(disp, ax=None, scale=1., count=50, lw=1, c='k'):
     """
     Plot 2D pixel displacements as a wireframe grid.
 
     Parameters
     ----------
-    displacements : array, shape (2, height, width)
-        Pixel displacements. First index denotes direction: displacements[0] is
-        y-displacements, and displacements[1] is x-displacements.
+    disp : array, shape (2, height, width)
+        Pixel displacements. First index denotes direction: disp[0] is
+        y-displacements, and disp[1] is x-displacements.
     ax : matplotlib.axes.Axes object or None (default=None)
         Axes in which to plot the wireframe. If None, a new figure is created.
     scale : float (default=1.)
@@ -364,27 +364,52 @@ def plot_displacements2d(displacements, ax=None, scale=1., count=50):
     ax : matplotlib.axes.Axes object
         Axes object.
     """
+    # Note: could use matplotlib.plot_wireframe(), but that uses 3d axes which
+    # causes complications when plotting displace alongside other subplots.
+
     # Check input
-    displacements = check_array(displacements, ndim=3)
+    disp = check_array(disp, ndim=3)
 
-    # Create regular grid
-    h, w = displacements.shape[1:]
-    xv, yv = np.meshgrid(np.arange(w), np.arange(h))
-    z = np.zeros((h,w))
-
-    # If necessary, initialise figure
-    fig = None
+    # If necessary, create new figure
     if ax is None:
-        fig = plt.figure()
-        ax = fig.gca(projection='3d')
+        fig, ax = plt.subplots(1, 1)
 
-    # Plot wireframe grid
-    ax.plot_wireframe(xv+scale*displacements[1], yv+scale*displacements[0], z,
-                      rcount=count, ccount=count)
+    # Create regular grid points
+    h, w = disp.shape[1:]
+    yv = np.arange(h)
+    xv = np.arange(w)
+
+    # Create lines in y-direction
+    for i in np.linspace(0, w-1, count):
+        # x- and y-coordinates of the line
+        ind = int(np.floor(i))
+        x = i*np.ones(w) + scale*disp[1,:,ind]
+        y = yv + scale*disp[0,:,ind]
+
+        # If i is not an integer index, linearly interpolate displacements
+        t = i - ind
+        if t > 0:
+            x += scale * t * (disp[1,:,ind+1]-disp[1,:,ind])
+            y += scale * t * (disp[0,::-1,ind+1]-disp[0,::-1,ind])
+        ax.plot(x, y, c=c, lw=lw)
+
+    # Create lines in x-direction
+    for i in np.linspace(0, h-1, count):
+        # x- and y-coordinates of the line
+        ind = int(np.floor(i))
+        x = xv + scale*disp[1,ind,:]
+        y = i*np.ones(h) + scale*disp[0,ind,:]
+
+        # If i is not an integer index, linearly interpolate displacements
+        t = i - ind
+        if t > 0:
+            x += scale * t * (disp[1,ind+1,:]-disp[1,ind,:])
+            y += scale * t * (disp[0,ind+1,::-1]-disp[0,ind,::-1])
+        ax.plot(x, y, c=c, lw=lw)
 
     # Format axes
-    ax.view_init(elev=-90, azim=-90)
     ax.set_aspect('equal')
-    ax.set_axis_off()
-    
+    ax.set_xticks([])
+    ax.set_yticks([])
+
     return ax
