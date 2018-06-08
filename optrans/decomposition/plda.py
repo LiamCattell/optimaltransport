@@ -2,11 +2,12 @@ import warnings
 import numpy as np
 from scipy.linalg import eigh
 from sklearn.metrics import accuracy_score
+from sklearn.base import BaseEstimator
 
 from optrans.utils import check_array
 
 
-class PLDA():
+class PLDA(BaseEstimator):
     """
     Penalized Linear Discriminant Analysis.
 
