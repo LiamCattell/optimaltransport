@@ -3,4 +3,4 @@ Continuous module
 =================
 
 .. automodule:: optrans.continuous
-   :members:
+   :members: CDT, RadonCDT, CLOT, VOT2D, MultiVOT2D, SPOT2D
