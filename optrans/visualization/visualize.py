@@ -9,9 +9,6 @@ from ..decomposition import get_mode_variation, get_mode_histogram
 from ..continuous import BaseTransform
 
 
-def plot_mode():
-    return
-
 def get_mode_image(pipeline, component=0, shape=None, transform=None,
                    img0=None, n_std=3., n_steps=5, padding=2):
     """
@@ -340,6 +337,11 @@ def plot_mode_image(pipeline, component=0, shape=None, transform=None,
 
 
 def plot_mode_histogram_image():
+    """
+    .. todo::
+
+        Plot the mode of variation histogram and images in the same figure.
+    """
     return
 
 
@@ -358,6 +360,10 @@ def plot_displacements2d(disp, ax=None, scale=1., count=50, lw=1, c='k'):
         Exaggeration scale applied to the displacements before visualization.
     count : int (default=50)
         Use at most this many rows and columns in the wireframe.
+    lw : float (default=1)
+        Width of the grid lines.
+    c : matplotlib color (default='k')
+        Color of the grid lines.
 
     Returns
     -------
@@ -383,7 +389,7 @@ def plot_displacements2d(disp, ax=None, scale=1., count=50, lw=1, c='k'):
     for i in np.linspace(0, w-1, count):
         # x- and y-coordinates of the line
         ind = int(np.floor(i))
-        x = i*np.ones(w) + scale*disp[1,:,ind]
+        x = i*np.ones(h) + scale*disp[1,:,ind]
         y = yv + scale*disp[0,:,ind]
 
         # If i is not an integer index, linearly interpolate displacements
@@ -398,7 +404,7 @@ def plot_displacements2d(disp, ax=None, scale=1., count=50, lw=1, c='k'):
         # x- and y-coordinates of the line
         ind = int(np.floor(i))
         x = xv + scale*disp[1,ind,:]
-        y = i*np.ones(h) + scale*disp[0,ind,:]
+        y = i*np.ones(w) + scale*disp[0,ind,:]
 
         # If i is not an integer index, linearly interpolate displacements
         t = i - ind

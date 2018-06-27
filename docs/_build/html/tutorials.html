@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Installation &#8212; optimaltransport 1.0 documentation</title>
+    <title>Tutorials and examples &#8212; optimaltransport 1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,8 +26,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="top" title="optimaltransport 1.0 documentation" href="index.html" />
-    <link rel="next" title="Continuous module" href="continuous.html" />
-    <link rel="prev" title="Welcome to optimaltransport’s documentation!" href="index.html" />
+    <link rel="prev" title="Visualization module" href="visualization.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
@@ -44,10 +43,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="continuous.html" title="Continuous module"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="Welcome to optimaltransport’s documentation!"
+          <a href="visualization.html" title="Visualization module"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">optimaltransport 1.0 documentation</a> &#187;</li> 
       </ul>
@@ -55,15 +51,12 @@
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">Welcome to optimaltransport&#8217;s documentation!</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="continuous.html"
-                        title="next chapter">Continuous module</a></p>
+  <p class="topless"><a href="visualization.html"
+                        title="previous chapter">Visualization module</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/install.txt"
+      <li><a href="_sources/tutorials.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -85,18 +78,17 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
-<p>Since the <code class="docutils literal"><span class="pre">optrans</span></code> package cannot yet be installed via pip, easy_install or Anaconda, we must add its directory to the Python path:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;path/to/optimaltransport&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Once we have added the path to the package, we can import classes and functions as usual. For example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">optrans.utils</span> <span class="kn">import</span> <span class="n">signal_to_pdf</span>
-<span class="kn">from</span> <span class="nn">optrans.continuous</span> <span class="kn">import</span> <span class="n">CDT</span>
-</pre></div>
-</div>
+  <div class="section" id="tutorials-and-examples">
+<h1>Tutorials and examples<a class="headerlink" href="#tutorials-and-examples" title="Permalink to this headline">¶</a></h1>
+<p>Several <code class="docutils literal"><span class="pre">optrans</span></code> package tutorials are available in the <em>optimaltransport/tutorials</em> directory. The tutorials also contain some basic background information about optimals transport.</p>
+<ul class="simple">
+<li><strong>Transform basics</strong> &#8211; How to use the cumulative distribution transform (CDT) and Radon-CDT.</li>
+<li><strong>Geodesics</strong> &#8211; Comparing geodesics in data space and transport space.</li>
+<li><strong>PCA</strong> &#8211; Dimensionality reduction using principal component analysis (PCA).</li>
+<li><strong>PLDA</strong> &#8211; Data classification using penalized linear discriminant analysis (PLDA).</li>
+<li><strong>CCA</strong> &#8211; Finding correlations in data using canonical correlation analysis (CCA).</li>
+</ul>
+<p>Further examples for all of the classes and functions can be found in the <em>optimaltransport/tests</em> directory.</p>
 </div>
 
 
@@ -115,10 +107,7 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="continuous.html" title="Continuous module"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="Welcome to optimaltransport’s documentation!"
+          <a href="visualization.html" title="Visualization module"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">optimaltransport 1.0 documentation</a> &#187;</li> 
       </ul>

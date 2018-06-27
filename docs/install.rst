@@ -2,7 +2,7 @@
 Installation
 ============
 
-Since the optrans package cannot yet be installed via pip, easy_install or Anaconda, we must add its directory to the Python path:
+Since the ``optrans`` package cannot yet be installed via pip, easy_install or Anaconda, we must add its directory to the Python path:
 
 .. code-block:: python
 	

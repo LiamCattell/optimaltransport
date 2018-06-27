@@ -1,6 +1,9 @@
 
 Decomposition module
-=================
+====================
+
+.. warning::
+   Here is a sample warning.
 
 .. automodule:: optrans.decomposition
    :members:

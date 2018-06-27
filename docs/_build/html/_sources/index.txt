@@ -15,6 +15,8 @@ Contents:
    continuous
    decomposition
    utils
+   visualization
+   tutorials
 
 
 

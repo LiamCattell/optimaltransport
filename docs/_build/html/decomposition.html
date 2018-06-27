@@ -26,6 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="top" title="optimaltransport 1.0 documentation" href="index.html" />
+    <link rel="next" title="Utils module" href="utils.html" />
+    <link rel="prev" title="Continuous module" href="continuous.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
@@ -41,11 +43,23 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="utils.html" title="Utils module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="continuous.html" title="Continuous module"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">optimaltransport 1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="continuous.html"
+                        title="previous chapter">Continuous module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="utils.html"
+                        title="next chapter">Utils module</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -71,9 +85,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="decomposition-module">
-<h1>Decomposition module<a class="headerlink" href="#decomposition-module" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="module-optrans.decomposition"></span><dl class="class">
+  <div class="section" id="module-optrans.decomposition">
+<span id="decomposition-module"></span><h1>Decomposition module<a class="headerlink" href="#module-optrans.decomposition" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
 <dt id="optrans.decomposition.CCA">
 <em class="property">class </em><code class="descclassname">optrans.decomposition.</code><code class="descname">CCA</code><span class="sig-paren">(</span><em>n_components=1</em>, <em>scale=True</em>, <em>max_iter=500</em>, <em>tol=1e-06</em>, <em>copy=True</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.decomposition.CCA" title="Permalink to this definition">¶</a></dt>
 <dd><p>Canonical Correlation Analysis.</p>
@@ -751,335 +765,6 @@ hist is a list of arrays (one for each class).</p>
 </table>
 </dd></dl>
 
-<dl class="class">
-<dt>
-<em class="property">class </em><code class="descclassname">optrans.decomposition.</code><code class="descname">PLDA</code><span class="sig-paren">(</span><em>alpha=1.0</em>, <em>n_components=None</em><span class="sig-paren">)</span></dt>
-<dd><p>Penalized Linear Discriminant Analysis.</p>
-<p>This is both a dimensionality reduction method and a linear classifier.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>alpha</strong> : scalar (default=1.)</p>
-<blockquote>
-<div><p>Parameter that controls the proportion of LDA vs PCA.
-If alpha=0, PLDA functions like LDA. If alpha is large, PLDA functions
-more like PCA.</p>
-</div></blockquote>
-<p><strong>n_components</strong> : int or None (default=None)</p>
-<blockquote class="last">
-<div><p>Number of components to keep. If n_components is not set, all
-components are kept: n_components == min(n_samples, n_features).</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">References</p>
-<p>W. Wang et al. Penalized Fisher Discriminant Analysis and its Application
-to Image-Based Morphometry. Pattern Recognit. Lett., 32(15):2128-35, 2011</p>
-<p class="rubric">Attributes</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="10%" />
-<col width="90%" />
-</colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td><a href="#id33"><span class="problematic" id="id34">components_</span></a></td>
-<td>(array, shape (n_components, n_features)) Axes in the feature space. The components are sorted by the explained variance.</td>
-</tr>
-<tr class="row-even"><td><a href="#id35"><span class="problematic" id="id36">explained_variance_</span></a></td>
-<td>(array, shape (n_components,)) The amount of variance explained by each of the selected components.</td>
-</tr>
-<tr class="row-odd"><td><a href="#id37"><span class="problematic" id="id38">explained_variance_ratio_</span></a></td>
-<td>(array, shape(n_components,)) Proportion of variance explained by each of the selected components. If n_components is not set then all components are stored and the sum of explained variance ratios is equal to 1.0.</td>
-</tr>
-<tr class="row-even"><td><a href="#id39"><span class="problematic" id="id40">mean_</span></a></td>
-<td>(array, shape (n_features,)) Per-feature empirical mean, estimated from the training set.</td>
-</tr>
-<tr class="row-odd"><td><a href="#id41"><span class="problematic" id="id42">n_components_</span></a></td>
-<td>(int) The number of components.</td>
-</tr>
-<tr class="row-even"><td><a href="#id43"><span class="problematic" id="id44">coef_</span></a></td>
-<td>(array, shape (n_features,) or (n_classes, n_features)) Weight vector(s).</td>
-</tr>
-<tr class="row-odd"><td><a href="#id45"><span class="problematic" id="id46">intercept_</span></a></td>
-<td>(array, shape (n_features,)) Intercept term.</td>
-</tr>
-<tr class="row-even"><td><a href="#id47"><span class="problematic" id="id48">class_means_</span></a></td>
-<td>(array, shape (n_classes, n_features)) Class means, estimated from the training set.</td>
-</tr>
-<tr class="row-odd"><td><a href="#id49"><span class="problematic" id="id50">classes_</span></a></td>
-<td>(array, shape (n_classes,)) Unique class labels.</td>
-</tr>
-</tbody>
-</table>
-<p class="rubric">Methods</p>
-<dl class="method">
-<dt>
-<code class="descname">decision_function</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span></dt>
-<dd><p>Predict confidence scores for samples.</p>
-<p>The confidence score for a sample is the signed distance of that
-sample to the hyperplane.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_features)</p>
-<blockquote>
-<div><p>Input data.</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>scores</strong> : array, shape=(n_samples,) if n_classes == 2</p>
-<blockquote class="last">
-<div><blockquote>
-<div><p>else (n_samples, n_classes)</p>
-</div></blockquote>
-<p>Confidence scores per (sample, class) combination. In the binary
-case, confidence score for self.classes_[1] where &gt;0 means this
-class would be predicted.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">fit</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span></dt>
-<dd><p>Fit PLDA model according to the given training data and parameters.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_features)</p>
-<blockquote>
-<div><p>Training data.</p>
-</div></blockquote>
-<p><strong>y</strong> : array, shape (n_samples,)</p>
-<blockquote class="last">
-<div><p>Target values.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">fit_transform</code><span class="sig-paren">(</span><em>X</em>, <em>y</em><span class="sig-paren">)</span></dt>
-<dd><p>Fit the model with X and transform X.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_features)</p>
-<blockquote>
-<div><p>Training data.</p>
-</div></blockquote>
-<p><strong>y</strong> : array, shape (n_samples,)</p>
-<blockquote>
-<div><p>Target values.</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X_new</strong> : array, shape (n_samples, n_components)</p>
-<blockquote class="last">
-<div><p>Transformed data.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">inverse_transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span></dt>
-<dd><p>Transform data back to its original space.</p>
-<p>Note: If n_components is less than the maximum, information will be
-lost, so reconstructed data will not exactly match the original data.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array shape (n_samples, n_components)</p>
-<blockquote>
-<div><p>New data.</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X_original</strong> : array, shape (n_samples, n_features)</p>
-<blockquote class="last">
-<div><p>Data transformed back into original space.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">predict</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span></dt>
-<dd><p>Predict class labels for samples in X.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_features)</p>
-<blockquote>
-<div><p>Input data.</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>C</strong> : array, shape (n_samples,)</p>
-<blockquote class="last">
-<div><p>Predicted class label per sample.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">predict_log_proba</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span></dt>
-<dd><p>Estimate log probability.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_features)</p>
-<blockquote>
-<div><p>Input data.</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>C</strong> : array, shape (n_samples, n_classes)</p>
-<blockquote class="last">
-<div><p>Estimated log probabilities.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">predict_proba</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span></dt>
-<dd><p>Estimate probability.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_features)</p>
-<blockquote>
-<div><p>Input data.</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>C</strong> : array, shape (n_samples, n_classes)</p>
-<blockquote class="last">
-<div><p>Estimated probabilities.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">predict_transformed</code><span class="sig-paren">(</span><em>X_trans</em><span class="sig-paren">)</span></dt>
-<dd><p>Predict class labels for data that have already been transformed by
-self.transform(X).</p>
-<p>This is useful for plotting classification boundaries.
-Note: Due to arithemtic discrepancies, this may return slightly
-different class labels to self.predict(X).</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X_trans</strong> : array, shape (n_samples, n_components)</p>
-<blockquote>
-<div><p>Test samples that have already been transformed into PLDA space.</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>y</strong> : array, shape (n_samples,)</p>
-<blockquote class="last">
-<div><p>Predicted class labels for X_trans.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">score</code><span class="sig-paren">(</span><em>X</em>, <em>y</em>, <em>sample_weight=None</em><span class="sig-paren">)</span></dt>
-<dd><p>Returns the mean accuracy on the given test data and labels.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_features)</p>
-<blockquote>
-<div><p>Test samples.</p>
-</div></blockquote>
-<p><strong>y</strong> : array, shape (n_samples,)</p>
-<blockquote>
-<div><p>True labels for X.</p>
-</div></blockquote>
-<p><strong>sample_weight</strong> : array, shape (n_samples,), optional</p>
-<blockquote>
-<div><p>Sample weights.</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>score</strong> : float</p>
-<blockquote class="last">
-<div><p>Mean accuracy of self.predict(X) w.r.t. y.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt>
-<code class="descname">transform</code><span class="sig-paren">(</span><em>X</em><span class="sig-paren">)</span></dt>
-<dd><p>Transform data.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_features)</p>
-<blockquote>
-<div><p>Input data.</p>
-</div></blockquote>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>X_new</strong> : array, shape (n_samples, n_components)</p>
-<blockquote class="last">
-<div><p>Transformed data.</p>
-</div></blockquote>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
 </div>
 
 
@@ -1097,6 +782,12 @@ different class labels to self.predict(X).</p>
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="utils.html" title="Utils module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="continuous.html" title="Continuous module"
+             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">optimaltransport 1.0 documentation</a> &#187;</li> 
       </ul>
     </div>

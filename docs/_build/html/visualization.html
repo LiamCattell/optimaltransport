@@ -1,0 +1,321 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Visualization module &#8212; optimaltransport 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="top" title="optimaltransport 1.0 documentation" href="index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">optimaltransport 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/visualization.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-optrans.visualization">
+<span id="visualization-module"></span><h1>Visualization module<a class="headerlink" href="#module-optrans.visualization" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="optrans.visualization.get_mode_image">
+<code class="descclassname">optrans.visualization.</code><code class="descname">get_mode_image</code><span class="sig-paren">(</span><em>pipeline</em>, <em>component=0</em>, <em>shape=None</em>, <em>transform=None</em>, <em>img0=None</em>, <em>n_std=3.0</em>, <em>n_steps=5</em>, <em>padding=2</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.visualization.get_mode_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the mode of variation along a given direction through the data (in image
+space) as a single, big image.</p>
+<p>This function combines the output images from
+optrans.decomposition.get_mode_variation() into one single image.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pipeline</strong> : list of objects</p>
+<blockquote>
+<div><p>The data processing pipeline. For example, if the data underwent PCA
+then PLDA, pipeline=[pca, plda], where pca and plda are trained
+decomposition objects.</p>
+</div></blockquote>
+<p><strong>component</strong> : int (default=0.)</p>
+<blockquote>
+<div><p>Index of the desired component.</p>
+</div></blockquote>
+<p><strong>shape</strong> : array_like or None</p>
+<blockquote>
+<div><p>Shape of the 2D input data, in the format (height, width). Note: this
+is the shape of the data that were input into the first element in the
+pipeline. For example, if the original inputs were Radon-CDTs, then
+shape might be (100,180). If None, the shape is estimated based on the
+number of data features.</p>
+</div></blockquote>
+<p><strong>transform</strong> : object or None</p>
+<blockquote>
+<div><p>Optimal transport transform object. This allows data to be transformed
+back from transport space to image space. If None, no inverse transform
+is computed.</p>
+</div></blockquote>
+<p><strong>img0</strong> : array, shape (height, width) or None</p>
+<blockquote>
+<div><p>Reference image used in the transform. If None, no inverse transform
+is computed.</p>
+</div></blockquote>
+<p><strong>n_std</strong> : float (default=3.)</p>
+<blockquote>
+<div><p>Range of standard deviations along the direction. For example if
+n_std=3, the returned data will correspond to the range -1.5*std to
++1.5*std.</p>
+</div></blockquote>
+<p><strong>n_steps</strong> : int (default=5)</p>
+<blockquote>
+<div><p>Number of steps along the direction.</p>
+</div></blockquote>
+<p><strong>padding</strong> : int (default=2)</p>
+<blockquote>
+<div><p>Padding (in pixels) between images in the mode of variation.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>img</strong> : array, shape (height, n_steps*(width+padding)+padding)</p>
+<blockquote class="last">
+<div><p>Reconstructed data along desired direction as a single, big image.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="optrans.visualization.plot_mode_histogram">
+<code class="descclassname">optrans.visualization.</code><code class="descname">plot_mode_histogram</code><span class="sig-paren">(</span><em>X</em>, <em>y=None</em>, <em>component=0</em>, <em>decomp=None</em>, <em>n_std=3.0</em>, <em>n_bins=10</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.visualization.plot_mode_histogram" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the histogram of data projected on to a particular direction.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>X</strong> : array, shape (n_samples, n_components)</p>
+<blockquote>
+<div><p>Data after decomposition (e.g. PCA, PLDA).</p>
+</div></blockquote>
+<p><strong>y</strong> : array, shape (n_samples,) or None</p>
+<blockquote>
+<div><p>Class labels. If None, all data are assumed to belong to the same class.</p>
+</div></blockquote>
+<p><strong>component</strong> : int (default=0.)</p>
+<blockquote>
+<div><p>Index of the desired component.</p>
+</div></blockquote>
+<p><strong>decomp</strong> : object</p>
+<blockquote>
+<div><p>A trained PCA or PLDA object. This is used to compute the standard
+deviation of the training data projected on to the desired component.
+If None, the standard deviation is estimated using X.</p>
+</div></blockquote>
+<p><strong>n_std</strong> : float (default=3.)</p>
+<blockquote>
+<div><p>Range of standard deviations along the direction. For example if
+n_std=3, the returned data will correspond to the range -1.5*std to
++1.5*std.</p>
+</div></blockquote>
+<p><strong>n_bins</strong> : int (default=10)</p>
+<blockquote>
+<div><p>Number of histogram bins.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ax</strong> : matplotlib.axes.Axes object</p>
+<blockquote class="last">
+<div><p>Axes object.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="optrans.visualization.plot_mode_image">
+<code class="descclassname">optrans.visualization.</code><code class="descname">plot_mode_image</code><span class="sig-paren">(</span><em>pipeline</em>, <em>component=0</em>, <em>shape=None</em>, <em>transform=None</em>, <em>img0=None</em>, <em>n_std=3.0</em>, <em>n_steps=5</em>, <em>padding=2</em>, <em>cmap=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.visualization.plot_mode_image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the mode of variation along a given direction through the data (in
+image space).</p>
+<p>This function plots the output of optrans.visualization.get_mode_image().</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>pipeline</strong> : list of objects</p>
+<blockquote>
+<div><p>The data processing pipeline. For example, if the data underwent PCA
+then PLDA, pipeline=[pca, plda], where pca and plda are trained
+decomposition objects.</p>
+</div></blockquote>
+<p><strong>component</strong> : int (default=0.)</p>
+<blockquote>
+<div><p>Index of the desired component.</p>
+</div></blockquote>
+<p><strong>shape</strong> : array_like or None</p>
+<blockquote>
+<div><p>Shape of the 2D input data, in the format (height, width). Note: this
+is the shape of the data that were input into the first element in the
+pipeline. For example, if the original inputs were Radon-CDTs, then
+shape might be (100,180). If None, the shape is estimated based on the
+number of data features.</p>
+</div></blockquote>
+<p><strong>transform</strong> : object or None</p>
+<blockquote>
+<div><p>Optimal transport transform object. This allows data to be transformed
+back from transport space to image space. If None, no inverse transform
+is computed.</p>
+</div></blockquote>
+<p><strong>img0</strong> : array, shape (height, width) or None</p>
+<blockquote>
+<div><p>Reference image used in the transform. If None, no inverse transform
+is computed.</p>
+</div></blockquote>
+<p><strong>n_std</strong> : float (default=3.)</p>
+<blockquote>
+<div><p>Range of standard deviations along the direction. For example if
+n_std=3, the returned data will correspond to the range -1.5*std to
++1.5*std.</p>
+</div></blockquote>
+<p><strong>n_steps</strong> : int (default=5)</p>
+<blockquote>
+<div><p>Number of steps along the direction.</p>
+</div></blockquote>
+<p><strong>padding</strong> : int (default=2)</p>
+<blockquote>
+<div><p>Padding (in pixels) between images in the mode of variation.</p>
+</div></blockquote>
+<p><strong>cmap</strong> : matplotlib.Colormap or None</p>
+<blockquote>
+<div><p>Image colormap.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ax</strong> : matplotlib.axes.Axes object</p>
+<blockquote class="last">
+<div><p>Axes object.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="optrans.visualization.plot_displacements2d">
+<code class="descclassname">optrans.visualization.</code><code class="descname">plot_displacements2d</code><span class="sig-paren">(</span><em>disp</em>, <em>ax=None</em>, <em>scale=1.0</em>, <em>count=50</em>, <em>lw=1</em>, <em>c='k'</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.visualization.plot_displacements2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot 2D pixel displacements as a wireframe grid.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>disp</strong> : array, shape (2, height, width)</p>
+<blockquote>
+<div><p>Pixel displacements. First index denotes direction: disp[0] is
+y-displacements, and disp[1] is x-displacements.</p>
+</div></blockquote>
+<p><strong>ax</strong> : matplotlib.axes.Axes object or None (default=None)</p>
+<blockquote>
+<div><p>Axes in which to plot the wireframe. If None, a new figure is created.</p>
+</div></blockquote>
+<p><strong>scale</strong> : float (default=1.)</p>
+<blockquote>
+<div><p>Exaggeration scale applied to the displacements before visualization.</p>
+</div></blockquote>
+<p><strong>count</strong> : int (default=50)</p>
+<blockquote>
+<div><p>Use at most this many rows and columns in the wireframe.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>ax</strong> : matplotlib.axes.Axes object</p>
+<blockquote class="last">
+<div><p>Axes object.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">optimaltransport 1.0 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Liam Cattell.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.6.
+    </div>
+  </body>
+</html>

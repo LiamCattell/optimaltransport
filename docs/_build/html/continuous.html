@@ -26,8 +26,8 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/bizstyle.js"></script>
     <link rel="top" title="optimaltransport 1.0 documentation" href="index.html" />
-    <link rel="next" title="Utils module" href="utils.html" />
-    <link rel="prev" title="Welcome to optimaltransport’s documentation!" href="index.html" />
+    <link rel="next" title="Decomposition module" href="decomposition.html" />
+    <link rel="prev" title="Installation" href="install.html" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <!--[if lt IE 9]>
     <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
@@ -44,22 +44,30 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="utils.html" title="Utils module"
+          <a href="decomposition.html" title="Decomposition module"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Welcome to optimaltransport’s documentation!"
+          <a href="install.html" title="Installation"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">optimaltransport 1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Continuous module</a><ul>
+<li><a class="reference internal" href="#cdt">CDT</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html"
-                        title="previous chapter">Welcome to optimaltransport&#8217;s documentation!</a></p>
+  <p class="topless"><a href="install.html"
+                        title="previous chapter">Installation</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="utils.html"
-                        title="next chapter">Utils module</a></p>
+  <p class="topless"><a href="decomposition.html"
+                        title="next chapter">Decomposition module</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -969,6 +977,137 @@ lot[0] is y-LOT, and lot[1] is x-LOT.</p>
 
 </dd></dl>
 
+<div class="section" id="cdt">
+<h2>CDT<a class="headerlink" href="#cdt" title="Permalink to this headline">¶</a></h2>
+<p>Cumulative distribution transform (CDT).</p>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">optrans.continuous.</code><code class="descname">CDT</code></dt>
+<dd><p>Cumulative Distribution Transform.</p>
+<p class="rubric">References</p>
+<p>[The cumulative distribution transform and linear pattern classification]
+(<a class="reference external" href="https://arxiv.org/abs/1507.05936">https://arxiv.org/abs/1507.05936</a>)</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="66%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a href="#id63"><span class="problematic" id="id64">displacements_</span></a></td>
+<td>(1d array) Displacements u.</td>
+</tr>
+<tr class="row-even"><td><a href="#id65"><span class="problematic" id="id66">transport_map_</span></a></td>
+<td>(1d array) Transport map f.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt>
+<code class="descname">apply_forward_map</code><span class="sig-paren">(</span><em>transport_map</em>, <em>sig1</em><span class="sig-paren">)</span></dt>
+<dd><p>Appy forward transport map.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>transport_map</strong> : 1d array</p>
+<blockquote>
+<div><p>Forward transport map.</p>
+</div></blockquote>
+<p><strong>sig1</strong> : 1d array</p>
+<blockquote>
+<div><p>Signal to transform.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sig0_recon</strong> : 1d array</p>
+<blockquote class="last">
+<div><p>Reconstructed reference signal sig0.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">apply_inverse_map</code><span class="sig-paren">(</span><em>transport_map</em>, <em>sig0</em><span class="sig-paren">)</span></dt>
+<dd><p>Apply inverse transport map.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>transport_map</strong> : 1d array</p>
+<blockquote>
+<div><p>Forward transport map. Inverse is computed in this function.</p>
+</div></blockquote>
+<p><strong>sig0</strong> : 1d array</p>
+<blockquote>
+<div><p>Reference signal.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sig1_recon</strong> : 1d array</p>
+<blockquote class="last">
+<div><p>Reconstructed signal sig1.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">forward</code><span class="sig-paren">(</span><em>sig0</em>, <em>sig1</em><span class="sig-paren">)</span></dt>
+<dd><p>Forward transform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>sig0</strong> : 1d array</p>
+<blockquote>
+<div><p>Reference signal.</p>
+</div></blockquote>
+<p><strong>sig1</strong> : 1d array</p>
+<blockquote>
+<div><p>Signal to transform.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>lot</strong> : 1d array</p>
+<blockquote class="last">
+<div><p>CDT of input signal sig1.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">inverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Inverse transform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sig1_recon</strong> : 1d array</p>
+<blockquote class="last">
+<div><p>Reconstructed signal sig1.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 </div>
 
 
@@ -987,10 +1126,10 @@ lot[0] is y-LOT, and lot[1] is x-LOT.</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="utils.html" title="Utils module"
+          <a href="decomposition.html" title="Decomposition module"
              >next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Welcome to optimaltransport’s documentation!"
+          <a href="install.html" title="Installation"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">optimaltransport 1.0 documentation</a> &#187;</li> 
       </ul>
