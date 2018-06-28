@@ -6,6 +6,12 @@ import matplotlib.pyplot as plt
 from optrans.utils import signal_to_pdf
 from optrans.continuous import RadonCDT
 
+"""
+This is the example in the README.
+
+Liam Cattell -- June 2018
+"""
+
 # Create a reference image that integrates to 1
 img0 = np.zeros((128,128))
 img0[96,24] = 1.
