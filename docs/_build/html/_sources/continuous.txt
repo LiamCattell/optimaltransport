@@ -2,7 +2,38 @@
 Continuous module
 =================
 
-This module contains optimal transport methods based on the Monge formulation of the optimal transport problem.
+This module contains optimal transport (OT) methods based on the Monge formulation of the OT problem.
+
+CDT
+---
 
 .. automodule:: optrans.continuous
-   :members:
+   :members: CDT
+
+
+Radon-CDT
+---------
+
+.. automodule:: optrans.continuous
+   :members: RadonCDT
+
+
+Continuous LOT
+--------------
+
+.. automodule:: optrans.continuous
+   :members: CLOT
+
+
+Variational OT
+--------------
+
+.. automodule:: optrans.continuous
+   :members: VOT2D, MultiVOT2D
+
+
+Single-potential OT
+-------------------
+
+.. automodule:: optrans.continuous
+   :members: SPOT2D

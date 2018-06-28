@@ -9,7 +9,7 @@ Welcome to optimaltransport's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    install.rst
    continuous.rst
@@ -19,11 +19,9 @@ Contents:
    tutorials.rst
 
 
-
 Indices and tables
 ==================
 
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-

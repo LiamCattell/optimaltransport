@@ -57,12 +57,7 @@
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Continuous module</a><ul>
-<li><a class="reference internal" href="#cdt">CDT</a></li>
-<li><a class="reference internal" href="#radon-cdt">Radon-CDT</a></li>
-<li><a class="reference internal" href="#clot">CLOT</a></li>
-<li><a class="reference internal" href="#d-vot">2D VOT</a></li>
-<li><a class="reference internal" href="#d-multi-scale-vot">2D multi-scale VOT</a></li>
-<li><a class="reference internal" href="#d-spot">2D SPOT</a></li>
+<li><a class="reference internal" href="#module-optrans.continuous">CDT</a></li>
 </ul>
 </li>
 </ul>
@@ -100,25 +95,136 @@
             
   <div class="section" id="continuous-module">
 <h1>Continuous module<a class="headerlink" href="#continuous-module" title="Permalink to this headline">¶</a></h1>
-<p>Continuous optimal transport transform module.</p>
-<p>Making some major changes to this page!!!!!!</p>
-<div class="section" id="cdt">
-<h2>CDT<a class="headerlink" href="#cdt" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="radon-cdt">
-<h2>Radon-CDT<a class="headerlink" href="#radon-cdt" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="clot">
-<h2>CLOT<a class="headerlink" href="#clot" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="d-vot">
-<h2>2D VOT<a class="headerlink" href="#d-vot" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="d-multi-scale-vot">
-<h2>2D multi-scale VOT<a class="headerlink" href="#d-multi-scale-vot" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="d-spot">
-<h2>2D SPOT<a class="headerlink" href="#d-spot" title="Permalink to this headline">¶</a></h2>
+<p>This module contains optimal transport methods based on the Monge formulation of the optimal transport problem.</p>
+<div class="section" id="module-optrans.continuous">
+<span id="cdt"></span><h2>CDT<a class="headerlink" href="#module-optrans.continuous" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="optrans.continuous.CDT">
+<em class="property">class </em><code class="descclassname">optrans.continuous.</code><code class="descname">CDT</code><a class="headerlink" href="#optrans.continuous.CDT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cumulative Distribution Transform.</p>
+<p class="rubric">References</p>
+<p>[The cumulative distribution transform and linear pattern classification]
+(<a class="reference external" href="https://arxiv.org/abs/1507.05936">https://arxiv.org/abs/1507.05936</a>)</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="66%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a href="#id1"><span class="problematic" id="id2">displacements_</span></a></td>
+<td>(1d array) Displacements u.</td>
+</tr>
+<tr class="row-even"><td><a href="#id3"><span class="problematic" id="id4">transport_map_</span></a></td>
+<td>(1d array) Transport map f.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="optrans.continuous.CDT.apply_forward_map">
+<code class="descname">apply_forward_map</code><span class="sig-paren">(</span><em>transport_map</em>, <em>sig1</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.CDT.apply_forward_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appy forward transport map.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>transport_map</strong> : 1d array</p>
+<blockquote>
+<div><p>Forward transport map.</p>
+</div></blockquote>
+<p><strong>sig1</strong> : 1d array</p>
+<blockquote>
+<div><p>Signal to transform.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sig0_recon</strong> : 1d array</p>
+<blockquote class="last">
+<div><p>Reconstructed reference signal sig0.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.continuous.CDT.apply_inverse_map">
+<code class="descname">apply_inverse_map</code><span class="sig-paren">(</span><em>transport_map</em>, <em>sig0</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.CDT.apply_inverse_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply inverse transport map.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>transport_map</strong> : 1d array</p>
+<blockquote>
+<div><p>Forward transport map. Inverse is computed in this function.</p>
+</div></blockquote>
+<p><strong>sig0</strong> : 1d array</p>
+<blockquote>
+<div><p>Reference signal.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sig1_recon</strong> : 1d array</p>
+<blockquote class="last">
+<div><p>Reconstructed signal sig1.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.continuous.CDT.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>sig0</em>, <em>sig1</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.CDT.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward transform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>sig0</strong> : 1d array</p>
+<blockquote>
+<div><p>Reference signal.</p>
+</div></blockquote>
+<p><strong>sig1</strong> : 1d array</p>
+<blockquote>
+<div><p>Signal to transform.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>lot</strong> : 1d array</p>
+<blockquote class="last">
+<div><p>CDT of input signal sig1.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.continuous.CDT.inverse">
+<code class="descname">inverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.CDT.inverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inverse transform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sig1_recon</strong> : 1d array</p>
+<blockquote class="last">
+<div><p>Reconstructed signal sig1.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 
