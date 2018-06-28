@@ -53,11 +53,12 @@ import matplotlib.pyplot as plt
 from optrans.utils import signal_to_pdf
 from optrans.continuous import RadonCDT
 
-# Create a uniform reference image that integrates to 1
+# Create a reference image that integrates to 1
 img0 = np.zeros((128,128))
-img0 = signal_to_pdf(img0, total=1.)
+img0[96,24] = 1.
+img0 = signal_to_pdf(img0, sigma=5., total=1.)
 
-# Create an image of a Gaussian that also integrates to 1
+# Create an image that also integrates to 1
 img1 = np.zeros((128,128))
 img1[32,78] = 1.
 img1 = signal_to_pdf(img1, sigma=5., total=1.)
@@ -73,17 +74,17 @@ img0_recon = radoncdt.apply_forward_map(radoncdt.transport_map_, img1)
 # Plot the results
 fig, ax = plt.subplots(3, 2, figsize=(6,8))
 ax[0,0].imshow(img0)
-ax[0,0].title('Reference')
+ax[0,0].set_title('Reference')
 ax[0,1].imshow(img1)
-ax[0,1].title('Image')
-ax[1,0].imshow(img0_rcon)
-ax[1,0].title('Reconstructed\nreference')
+ax[0,1].set_title('Image')
+ax[1,0].imshow(img0_recon)
+ax[1,0].set_title('Reconstructed\nreference')
 ax[1,1].imshow(img1_recon)
-ax[1,1].title('Reconstructed\nimage')
+ax[1,1].set_title('Reconstructed\nimage')
 ax[2,0].imshow(radoncdt.displacements_)
-ax[2,0].title('Displacements')
+ax[2,0].set_title('Displacements')
 ax[2,1].imshow(radoncdt.transport_map_)
-ax[2,1].title('Transport map')
+ax[2,1].set_title('Transport map')
 fig.tight_layout()
 plt.show()
 ```
