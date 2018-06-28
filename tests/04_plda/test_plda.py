@@ -12,6 +12,8 @@ from optrans.decomposition import PLDA
 """
 Compare linear discriminant analysis (LDA), penalized LDA (PLDA), and principal
 component analysis (PCA) using Fisher's iris dataset.
+
+Liam Cattell -- March 2018
 """
 
 def plot_transform(X, y, ax):

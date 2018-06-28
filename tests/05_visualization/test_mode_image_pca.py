@@ -10,6 +10,8 @@ from optrans.visualization import plot_mode_image
 
 """
 Perform PCA on image data, and plot a PCA mode of variation as a single image.
+
+Liam Cattell -- March 2018
 """
 
 # Load some image data

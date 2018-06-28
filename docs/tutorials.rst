@@ -5,6 +5,7 @@ Tutorials and examples
 Several ``optrans`` package tutorials are available in the *optimaltransport/tutorials* directory. The tutorials also contain some basic background information about optimals transport.
 
 * **Transform basics** -- How to use the cumulative distribution transform (CDT) and Radon-CDT.
+* **Method comparison** -- Comparison of different continuous optimal transport methods.
 * **Geodesics** -- Comparing geodesics in data space and transport space.
 * **PCA** -- Dimensionality reduction using principal component analysis (PCA).
 * **PLDA** -- Data classification using penalized linear discriminant analysis (PLDA).

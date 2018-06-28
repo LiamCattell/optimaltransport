@@ -10,6 +10,12 @@ from scipy import misc
 from optrans.utils import signal_to_pdf
 from optrans.continuous import RadonCDT
 
+"""
+Generate the normalized images and Radon-CDTs for the ADNI dataset.
+The outputs are used in the datasets module.
+
+Liam Cattell -- January 2018
+"""
 
 def load_original():
     root = join('..','..','..','data','brain')

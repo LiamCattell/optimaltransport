@@ -11,12 +11,12 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
-   install
-   continuous
-   decomposition
-   utils
-   visualization
-   tutorials
+   install.rst
+   continuous.rst
+   decomposition.rst
+   utils.rst
+   visualization.rst
+   tutorials.rst
 
 
 

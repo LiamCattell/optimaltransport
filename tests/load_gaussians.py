@@ -9,6 +9,13 @@ from optrans.utils import signal_to_pdf
 from optrans.continuous import RadonCDT
 from optrans.datasets import gaussians
 
+"""
+Generate the normalized images and Radon-CDTs for the Gaussian blob dataset.
+The outputs are used in the datasets module.
+
+Liam Cattell -- January 2018
+"""
+
 def generate_image():
     X, y = gaussians.make_gaussians(n_samples=100, n_dots=[1,2,3])
     for i in range(X.shape[0]):

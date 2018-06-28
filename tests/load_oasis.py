@@ -11,6 +11,12 @@ from os.path import join
 from optrans.utils import signal_to_pdf
 from optrans.continuous import RadonCDT
 
+"""
+Generate the normalized images, Radon-CDTs, and metadata for the OASIS dataset.
+The outputs are used in the datasets module.
+
+Liam Cattell -- March 2018
+"""
 
 def load_original():
     root = 'X:/Data/MRI/oasis_cross-sectional'

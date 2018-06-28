@@ -10,6 +10,12 @@ from optrans.decomposition import PLDA
 from optrans.visualization import plot_mode_histogram
 from optrans.continuous import RadonCDT
 
+"""
+Plot the histograms of the Gaussian blob data projected on to the 1st PLDA
+direction.
+
+Liam Cattell -- May 2018
+"""
 
 # Load some image data
 X, y = gaussians.load_rcdt_maps()

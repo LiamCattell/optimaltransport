@@ -20,7 +20,7 @@ epsilon = 8.
 total = 100.
 
 # Create sample images
-img1 = np.zeros((128,128))
+img1 = np.zeros((128,100))
 img1[43,78] = 1.
 img0 = np.ones_like(img1)
 

@@ -13,6 +13,8 @@ from optrans.continuous import RadonCDT
 """
 Perform PCA + PLDA on Radon-CDT data, and plot a PLDA mode of variation (in
 image space) as a single image.
+
+Liam Cattell -- March 2018
 """
 
 # Load some Radon-CDT maps

@@ -1,5 +1,5 @@
 import sys
-sys.path.append('../../optimaltransport')
+sys.path.append('../../../optimaltransport')
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -12,6 +12,8 @@ from optrans.decomposition import PLDA
 
 """
 Classify Gaussian blobs using PCA + PLDA.
+
+Liam Cattell -- March 2018
 """
 
 # Load data
