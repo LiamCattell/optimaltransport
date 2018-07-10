@@ -94,3 +94,11 @@ This example code produces the following results:
 ![Example results](example.png)
 
 It should be noted that the optimal transport transforms are written in such a manner that the user can interchange the methods with minimal hassle. For example, `RadonCDT` in the above example could be replaced with the single-potential optimal transport method `SPOT2D`.
+
+
+## Acknowledgements
+
+* Liam Cattell (primary author)
+* Gustavo K. Rohde
+* Soheil Kolouri
+* Serim Park

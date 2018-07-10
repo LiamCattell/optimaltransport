@@ -2,7 +2,7 @@
 Continuous module
 =================
 
-This module contains optimal transport (OT) methods based on the Monge formulation of the OT problem.
+This module contains optimal transport (OT) methods based on the Monge formulation of the OT problem. At present, no discrete (Kantorovich) formulations have been implemented.
 
 CDT
 ---

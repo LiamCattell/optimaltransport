@@ -58,6 +58,10 @@
   <ul>
 <li><a class="reference internal" href="#">Continuous module</a><ul>
 <li><a class="reference internal" href="#module-optrans.continuous">CDT</a></li>
+<li><a class="reference internal" href="#module-optrans.continuous">Radon-CDT</a></li>
+<li><a class="reference internal" href="#module-optrans.continuous">Continuous LOT</a></li>
+<li><a class="reference internal" href="#module-optrans.continuous">Variational OT</a></li>
+<li><a class="reference internal" href="#module-optrans.continuous">Single-potential OT</a></li>
 </ul>
 </li>
 </ul>
@@ -95,7 +99,7 @@
             
   <div class="section" id="continuous-module">
 <h1>Continuous module<a class="headerlink" href="#continuous-module" title="Permalink to this headline">¶</a></h1>
-<p>This module contains optimal transport methods based on the Monge formulation of the optimal transport problem.</p>
+<p>This module contains optimal transport (OT) methods based on the Monge formulation of the OT problem. At present, no discrete (Kantorovich) formulations have been implemented.</p>
 <div class="section" id="module-optrans.continuous">
 <span id="cdt"></span><h2>CDT<a class="headerlink" href="#module-optrans.continuous" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
@@ -214,6 +218,773 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sig1_recon</strong> : 1d array</p>
+<blockquote class="last">
+<div><p>Reconstructed signal sig1.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-optrans.continuous">
+<span id="radon-cdt"></span><h2>Radon-CDT<a class="headerlink" href="#module-optrans.continuous" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="optrans.continuous.RadonCDT">
+<em class="property">class </em><code class="descclassname">optrans.continuous.</code><code class="descname">RadonCDT</code><span class="sig-paren">(</span><em>theta=array([  0</em>, <em>1</em>, <em>2</em>, <em>3</em>, <em>4</em>, <em>5</em>, <em>6</em>, <em>7</em>, <em>8</em>, <em>9</em>, <em>10</em>, <em>11</em>, <em>12</em>, <em>13</em>, <em>14</em>, <em>15</em>, <em>16</em>, <em>17</em>, <em>18</em>, <em>19</em>, <em>20</em>, <em>21</em>, <em>22</em>, <em>23</em>, <em>24</em>, <em>25</em>, <em>26</em>, <em>27</em>, <em>28</em>, <em>29</em>, <em>30</em>, <em>31</em>, <em>32</em>, <em>33</em>, <em>34</em>, <em>35</em>, <em>36</em>, <em>37</em>, <em>38</em>, <em>39</em>, <em>40</em>, <em>41</em>, <em>42</em>, <em>43</em>, <em>44</em>, <em>45</em>, <em>46</em>, <em>47</em>, <em>48</em>, <em>49</em>, <em>50</em>, <em>51</em>, <em>52</em>, <em>53</em>, <em>54</em>, <em>55</em>, <em>56</em>, <em>57</em>, <em>58</em>, <em>59</em>, <em>60</em>, <em>61</em>, <em>62</em>, <em>63</em>, <em>64</em>, <em>65</em>, <em>66</em>, <em>67</em>, <em>68</em>, <em>69</em>, <em>70</em>, <em>71</em>, <em>72</em>, <em>73</em>, <em>74</em>, <em>75</em>, <em>76</em>, <em>77</em>, <em>78</em>, <em>79</em>, <em>80</em>, <em>81</em>, <em>82</em>, <em>83</em>, <em>84</em>, <em>85</em>, <em>86</em>, <em>87</em>, <em>88</em>, <em>89</em>, <em>90</em>, <em>91</em>, <em>92</em>, <em>93</em>, <em>94</em>, <em>95</em>, <em>96</em>, <em>97</em>, <em>98</em>, <em>99</em>, <em>100</em>, <em>101</em>, <em>102</em>, <em>103</em>, <em>104</em>, <em>105</em>, <em>106</em>, <em>107</em>, <em>108</em>, <em>109</em>, <em>110</em>, <em>111</em>, <em>112</em>, <em>113</em>, <em>114</em>, <em>115</em>, <em>116</em>, <em>117</em>, <em>118</em>, <em>119</em>, <em>120</em>, <em>121</em>, <em>122</em>, <em>123</em>, <em>124</em>, <em>125</em>, <em>126</em>, <em>127</em>, <em>128</em>, <em>129</em>, <em>130</em>, <em>131</em>, <em>132</em>, <em>133</em>, <em>134</em>, <em>135</em>, <em>136</em>, <em>137</em>, <em>138</em>, <em>139</em>, <em>140</em>, <em>141</em>, <em>142</em>, <em>143</em>, <em>144</em>, <em>145</em>, <em>146</em>, <em>147</em>, <em>148</em>, <em>149</em>, <em>150</em>, <em>151</em>, <em>152</em>, <em>153</em>, <em>154</em>, <em>155</em>, <em>156</em>, <em>157</em>, <em>158</em>, <em>159</em>, <em>160</em>, <em>161</em>, <em>162</em>, <em>163</em>, <em>164</em>, <em>165</em>, <em>166</em>, <em>167</em>, <em>168</em>, <em>169</em>, <em>170</em>, <em>171</em>, <em>172</em>, <em>173</em>, <em>174</em>, <em>175</em>, <em>176</em>, <em>177</em>, <em>178</em>, <em>179])</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.RadonCDT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Radon Cumulative Distribution Transform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>theta</strong> : 1d array (default=np.arange(180))</p>
+<blockquote class="last">
+<div><p>Radon transform projection angles.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<p>[The Radon cumulative distribution transform and its application to image
+classification]
+(<a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4871726/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4871726/</a>)</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="77%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a href="#id5"><span class="problematic" id="id6">displacements_</span></a></td>
+<td>(array, shape (t, len(theta))) Displacements u.</td>
+</tr>
+<tr class="row-even"><td><a href="#id7"><span class="problematic" id="id8">transport_map_</span></a></td>
+<td>(array, shape (t, len(theta))) Transport map f.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="optrans.continuous.RadonCDT.apply_forward_map">
+<code class="descname">apply_forward_map</code><span class="sig-paren">(</span><em>transport_map</em>, <em>sig1</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.RadonCDT.apply_forward_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appy forward transport map.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>transport_map</strong> : array, shape (t, len(theta))</p>
+<blockquote>
+<div><p>Forward transport map.</p>
+</div></blockquote>
+<p><strong>sig1</strong> : 2d array, shape (height, width)</p>
+<blockquote>
+<div><p>Signal to transform.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sig0_recon</strong> : array, shape (height, width)</p>
+<blockquote class="last">
+<div><p>Reconstructed reference signal sig0.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.continuous.RadonCDT.apply_inverse_map">
+<code class="descname">apply_inverse_map</code><span class="sig-paren">(</span><em>transport_map</em>, <em>sig0</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.RadonCDT.apply_inverse_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appy inverse transport map.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>transport_map</strong> : 2d array, shape (t, len(theta))</p>
+<blockquote>
+<div><p>Forward transport map. Inverse is computed in this function.</p>
+</div></blockquote>
+<p><strong>sig0</strong> : array, shape (height, width)</p>
+<blockquote>
+<div><p>Reference signal.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sig1_recon</strong> : array, shape (height, width)</p>
+<blockquote class="last">
+<div><p>Reconstructed signal sig1.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.continuous.RadonCDT.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>sig0</em>, <em>sig1</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.RadonCDT.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward transform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>sig0</strong> : array, shape (height, width)</p>
+<blockquote>
+<div><p>Reference image.</p>
+</div></blockquote>
+<p><strong>sig1</strong> : array, shape (height, width)</p>
+<blockquote>
+<div><p>Signal to transform.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>rcdt</strong> : array, shape (t, len(theta))</p>
+<blockquote class="last">
+<div><p>Radon-CDT of input image sig1.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.continuous.RadonCDT.inverse">
+<code class="descname">inverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.RadonCDT.inverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inverse transform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sig1_recon</strong> : array, shape (height, width)</p>
+<blockquote class="last">
+<div><p>Reconstructed signal sig1.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-optrans.continuous">
+<span id="continuous-lot"></span><h2>Continuous LOT<a class="headerlink" href="#module-optrans.continuous" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="optrans.continuous.CLOT">
+<em class="property">class </em><code class="descclassname">optrans.continuous.</code><code class="descname">CLOT</code><span class="sig-paren">(</span><em>lr=0.01</em>, <em>momentum=0.0</em>, <em>decay=0.0</em>, <em>max_iter=300</em>, <em>tol=0.001</em>, <em>verbose=0</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.CLOT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Continuous Linear Optimal Transport Transform.</p>
+<p>This uses Nesterov&#8217;s accelerated gradient descent to remove the curl in the
+initial mapping.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>lr</strong> : float (default=0.01)</p>
+<blockquote>
+<div><p>Learning rate.</p>
+</div></blockquote>
+<p><strong>momentum</strong> : float (default=0.)</p>
+<blockquote>
+<div><p>Nesterov accelerated gradient descent momentum.</p>
+</div></blockquote>
+<p><strong>decay</strong> : float (default=0.)</p>
+<blockquote>
+<div><p>Learning rate decay over each update.</p>
+</div></blockquote>
+<p><strong>max_iter</strong> : int (default=300)</p>
+<blockquote>
+<div><p>Maximum number of iterations.</p>
+</div></blockquote>
+<p><strong>tol</strong> : float (default=0.001)</p>
+<blockquote>
+<div><p>Stop iterating when change in cost function is below this threshold.</p>
+</div></blockquote>
+<p><strong>verbose</strong> : int (default=1)</p>
+<blockquote class="last">
+<div><p>Verbosity during optimization. 0=no output, 1=print cost,
+2=print all metrics.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<p>[A continuous linear optimal transport approach for pattern analysis in
+image datasets]
+(<a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0031320315003507">https://www.sciencedirect.com/science/article/pii/S0031320315003507</a>)
+[Optimal mass transport for registration and warping]
+(<a class="reference external" href="https://link.springer.com/article/10.1023/B:VISI.0000036836.66311.97">https://link.springer.com/article/10.1023/B:VISI.0000036836.66311.97</a>)</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="88%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a href="#id9"><span class="problematic" id="id10">displacements_</span></a></td>
+<td>(array, shape (2, height, width)) Displacements u. First index denotes direction: displacements_[0] is y-displacements, and displacements_[1] is x-displacements.</td>
+</tr>
+<tr class="row-even"><td><a href="#id11"><span class="problematic" id="id12">transport_map_</span></a></td>
+<td>(array, shape (2, height, width)) Transport map f. First index denotes direction: transport_map_[0] is y-map, and transport_map_[1] is x-map.</td>
+</tr>
+<tr class="row-odd"><td><a href="#id13"><span class="problematic" id="id14">displacements_initial_</span></a></td>
+<td>(array, shape (2, height, width)) Initial displacements computed using the method by Haker et al.</td>
+</tr>
+<tr class="row-even"><td><a href="#id15"><span class="problematic" id="id16">transport_map_initial_</span></a></td>
+<td>(array, shape (2, height, width)) Initial transport map computed using the method by Haker et al.</td>
+</tr>
+<tr class="row-odd"><td><a href="#id17"><span class="problematic" id="id18">cost_</span></a></td>
+<td>(list of float) Value of cost function at each iteration.</td>
+</tr>
+<tr class="row-even"><td><a href="#id19"><span class="problematic" id="id20">curl_</span></a></td>
+<td>(list of float) Curl at each iteration.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="optrans.continuous.CLOT.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>sig0</em>, <em>sig1</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.CLOT.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward transform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>sig0</strong> : array, shape (height, width)</p>
+<blockquote>
+<div><p>Reference image.</p>
+</div></blockquote>
+<p><strong>sig1</strong> : array, shape (height, width)</p>
+<blockquote>
+<div><p>Signal to transform.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>lot</strong> : array, shape (2, height, width)</p>
+<blockquote class="last">
+<div><p>LOT transform of input image sig1. First index denotes direction:
+lot[0] is y-LOT, and lot[1] is x-LOT.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-optrans.continuous">
+<span id="variational-ot"></span><h2>Variational OT<a class="headerlink" href="#module-optrans.continuous" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="optrans.continuous.VOT2D">
+<em class="property">class </em><code class="descclassname">optrans.continuous.</code><code class="descname">VOT2D</code><span class="sig-paren">(</span><em>alpha=0.01</em>, <em>lr=0.01</em>, <em>beta1=0.9</em>, <em>beta2=0.999</em>, <em>decay=0.0</em>, <em>max_iter=300</em>, <em>tol=0.001</em>, <em>verbose=0</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.VOT2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Variational Optimal Transport 2D Transform.</p>
+<p>Unlike the original paper by Kundu et al., this implementation uses the
+Adam gradient descent optimizer.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>alpha</strong> : float (default=0.01)</p>
+<blockquote>
+<div><p>Regularization of the curl operator.</p>
+</div></blockquote>
+<p><strong>lr</strong> : float (default=0.01)</p>
+<blockquote>
+<div><p>Learning rate.</p>
+</div></blockquote>
+<p><strong>beta1</strong> : float (default=0.9)</p>
+<blockquote>
+<div><p>Adam optimizer parameter. 0 &lt; beta1 &lt; 1. Generally close to 1.</p>
+</div></blockquote>
+<p><strong>beta2</strong> : float (default=0.999)</p>
+<blockquote>
+<div><p>Adam optimizer parameter. 0 &lt; beta2 &lt; 1. Generally close to 1.</p>
+</div></blockquote>
+<p><strong>decay</strong> : float (default=0.)</p>
+<blockquote>
+<div><p>Learning rate decay over each update.</p>
+</div></blockquote>
+<p><strong>max_iter</strong> : int (default=300)</p>
+<blockquote>
+<div><p>Maximum number of iterations.</p>
+</div></blockquote>
+<p><strong>tol</strong> : float (default=0.001)</p>
+<blockquote>
+<div><p>Stop iterating when change in cost function is below this threshold.</p>
+</div></blockquote>
+<p><strong>verbose</strong> : int (default=1)</p>
+<blockquote class="last">
+<div><p>Verbosity during optimization. 0=no output, 1=print cost,
+2=print all metrics.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<p>[Discovery and visualization of structural biomarkers from MRI using
+transport-based morphometry]
+(<a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5912801/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5912801/</a>)
+[Adam - A method for stochastic optimization]
+(<a class="reference external" href="http://arxiv.org/abs/1412.6980v8">http://arxiv.org/abs/1412.6980v8</a>)</p>
+<p>MultiVOT2D</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="92%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a href="#id21"><span class="problematic" id="id22">displacements_</span></a></td>
+<td>(array, shape (2, height, width)) Displacements u. First index denotes direction: displacements_[0] is y-displacements, and displacements_[1] is x-displacements.</td>
+</tr>
+<tr class="row-even"><td><a href="#id23"><span class="problematic" id="id24">transport_map_</span></a></td>
+<td>(array, shape (2, height, width)) Transport map f. First index denotes direction: transport_map_[0] is y-map, and transport_map_[1] is x-map.</td>
+</tr>
+<tr class="row-odd"><td><a href="#id25"><span class="problematic" id="id26">cost_</span></a></td>
+<td>(list of float) Value of cost function at each iteration.</td>
+</tr>
+<tr class="row-even"><td><a href="#id27"><span class="problematic" id="id28">mse_</span></a></td>
+<td>(list of float) Mean squared error at each iteration.</td>
+</tr>
+<tr class="row-odd"><td><a href="#id29"><span class="problematic" id="id30">curl_</span></a></td>
+<td>(list of float) Curl at each iteration.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="optrans.continuous.VOT2D.apply_forward_map">
+<code class="descname">apply_forward_map</code><span class="sig-paren">(</span><em>transport_map</em>, <em>sig1</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.VOT2D.apply_forward_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appy forward transport map.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>transport_map</strong> : array, shape (2, height, width)</p>
+<blockquote>
+<div><p>Forward transport map.</p>
+</div></blockquote>
+<p><strong>sig1</strong> : 2d array, shape (height, width)</p>
+<blockquote>
+<div><p>Signal to transform.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sig0_recon</strong> : array, shape (height, width)</p>
+<blockquote class="last">
+<div><p>Reconstructed reference signal sig0.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.continuous.VOT2D.apply_inverse_map">
+<code class="descname">apply_inverse_map</code><span class="sig-paren">(</span><em>transport_map</em>, <em>sig0</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.VOT2D.apply_inverse_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appy inverse transport map.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>transport_map</strong> : array, shape (2, height, width)</p>
+<blockquote>
+<div><p>Forward transport map. Inverse is computed in this function.</p>
+</div></blockquote>
+<p><strong>sig0</strong> : array, shape (height, width)</p>
+<blockquote>
+<div><p>Reference signal.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sig1_recon</strong> : array, shape (height, width)</p>
+<blockquote class="last">
+<div><p>Reconstructed signal sig1.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.continuous.VOT2D.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>sig0</em>, <em>sig1</em>, <em>f_init=None</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.VOT2D.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward transform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>sig0</strong> : array, shape (height, width)</p>
+<blockquote>
+<div><p>Reference image.</p>
+</div></blockquote>
+<p><strong>sig1</strong> : array, shape (height, width)</p>
+<blockquote>
+<div><p>Signal to transform.</p>
+</div></blockquote>
+<p><strong>f_init</strong> : None or array, shape (2, height, width)</p>
+<blockquote>
+<div><p>Initial transport map. If None, the initial transport map is the
+identity transform.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>lot</strong> : array, shape (2, height, width)</p>
+<blockquote class="last">
+<div><p>LOT transform of input image sig1. First index denotes direction:
+lot[0] is y-LOT, and lot[1] is x-LOT.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.continuous.VOT2D.inverse">
+<code class="descname">inverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.VOT2D.inverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inverse transform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sig1_recon</strong> : array, shape (height, width)</p>
+<blockquote class="last">
+<div><p>Reconstructed signal sig1.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="optrans.continuous.MultiVOT2D">
+<em class="property">class </em><code class="descclassname">optrans.continuous.</code><code class="descname">MultiVOT2D</code><span class="sig-paren">(</span><em>n_scales=3</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.MultiVOT2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multi-Scale Variational Optimal Transport 2D Transform.</p>
+<p>Unlike the original paper by Kundu et al., this implementation uses the
+Adam gradient descent optimizer.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>n_scales</strong> : int (default=3)</p>
+<blockquote>
+<div><p>Number of scales.</p>
+</div></blockquote>
+<p><strong>alpha</strong> : array-like or float (default=0.01)</p>
+<blockquote>
+<div><p>Regularization of the curl operator. For scalar inputs, the same value
+is used for all scales. For array-like inputs, len(alpha)=n_scales.</p>
+</div></blockquote>
+<p><strong>lr</strong> : array-like or float (default=0.01)</p>
+<blockquote>
+<div><p>Learning rate. For scalar inputs, the same value is used for all scales.
+For array-like inputs, len(lr)=n_scales.</p>
+</div></blockquote>
+<p><strong>beta1</strong> : array-like or float (default=0.9)</p>
+<blockquote>
+<div><p>Adam optimizer parameter. 0 &lt; beta1 &lt; 1. Generally close to 1. For
+scalar inputs, the same value is used for all scales. For array-like
+inputs, len(beta1)=n_scales.</p>
+</div></blockquote>
+<p><strong>beta2</strong> : array-like or float (default=0.999)</p>
+<blockquote>
+<div><p>Adam optimizer parameter. 0 &lt; beta2 &lt; 1. Generally close to 1. For
+scalar inputs, the same value is used for all scales. For array-like
+inputs, len(beta2)=n_scales.</p>
+</div></blockquote>
+<p><strong>decay</strong> : array-like or float (default=0.)</p>
+<blockquote>
+<div><p>Learning rate decay over each update. For scalar inputs, the same value
+is used for all scales. For array-like inputs, len(decay)=n_scales.</p>
+</div></blockquote>
+<p><strong>max_iter</strong> : array-like or int (default=300)</p>
+<blockquote>
+<div><p>Maximum number of iterations. For scalar inputs, the same value is used
+for all scales. For array-like inputs, len(max_iter)=n_scales.</p>
+</div></blockquote>
+<p><strong>tol</strong> : array-like or float (default=0.001)</p>
+<blockquote>
+<div><p>Stop iterating when change in cost function is below this threshold.
+For scalar inputs, the same value is used for all scales. For array-like
+inputs, len(tol)=n_scales.</p>
+</div></blockquote>
+<p><strong>verbose</strong> : array-like or int (default=1)</p>
+<blockquote class="last">
+<div><p>Verbosity during optimization. 0=no output, 1=print cost,
+2=print all metrics. For scalar inputs, the same value is used for all
+scales. For array-like inputs, len(verbose)=n_scales.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<p>[Discovery and visualization of structural biomarkers from MRI using
+transport-based morphometry]
+(<a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5912801/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5912801/</a>)
+[Adam - A method for stochastic optimization]
+(<a class="reference external" href="http://arxiv.org/abs/1412.6980v8">http://arxiv.org/abs/1412.6980v8</a>)</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a href="#id31"><span class="problematic" id="id32">displacements_</span></a></td>
+<td>(array, shape (2, height, width)) Displacements u. First index denotes direction: displacements_[0] is y-displacements, and displacements_[1] is x-displacements.</td>
+</tr>
+<tr class="row-even"><td><a href="#id33"><span class="problematic" id="id34">transport_map_</span></a></td>
+<td>(array, shape (2, height, width)) Transport map f. First index denotes direction: transport_map_[0] is y-map, and transport_map_[1] is x-map.</td>
+</tr>
+<tr class="row-odd"><td><a href="#id35"><span class="problematic" id="id36">cost_</span></a></td>
+<td>(list of float) Value of cost function at each iteration.</td>
+</tr>
+<tr class="row-even"><td><a href="#id37"><span class="problematic" id="id38">mse_</span></a></td>
+<td>(list of float) Mean squared error at each iteration.</td>
+</tr>
+<tr class="row-odd"><td><a href="#id39"><span class="problematic" id="id40">curl_</span></a></td>
+<td>(list of float) Curl at each iteration.</td>
+</tr>
+<tr class="row-even"><td><a href="#id41"><span class="problematic" id="id42">params_</span></a></td>
+<td>(list of dict) Dictionary of parameters for each scale.</td>
+</tr>
+<tr class="row-odd"><td><a href="#id43"><span class="problematic" id="id44">displacements_all_</span></a></td>
+<td>(list of 3d array) Displacements u at all scales.</td>
+</tr>
+<tr class="row-even"><td><a href="#id45"><span class="problematic" id="id46">transport_map_all_</span></a></td>
+<td>(list of 3d array) Transport map f at all scales.</td>
+</tr>
+<tr class="row-odd"><td><a href="#id47"><span class="problematic" id="id48">cost_all_</span></a></td>
+<td>(list of list) Value of cost function at all scales.</td>
+</tr>
+<tr class="row-even"><td><a href="#id49"><span class="problematic" id="id50">mse_all_</span></a></td>
+<td>(list of list) Mean squared error at all scales.</td>
+</tr>
+<tr class="row-odd"><td><a href="#id51"><span class="problematic" id="id52">curl_all_</span></a></td>
+<td>(list of float) Curl at all scales.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="optrans.continuous.MultiVOT2D.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>sig0</em>, <em>sig1</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.MultiVOT2D.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward transform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>sig0</strong> : array, shape (height, width)</p>
+<blockquote>
+<div><p>Reference image.</p>
+</div></blockquote>
+<p><strong>sig1</strong> : array, shape (height, width)</p>
+<blockquote>
+<div><p>Signal to transform.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>lot</strong> : array, shape (2, height, width)</p>
+<blockquote class="last">
+<div><p>LOT transform of input image sig1. First index denotes direction:
+lot[0] is y-LOT, and lot[1] is x-LOT.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-optrans.continuous">
+<span id="single-potential-ot"></span><h2>Single-potential OT<a class="headerlink" href="#module-optrans.continuous" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="optrans.continuous.SPOT2D">
+<em class="property">class </em><code class="descclassname">optrans.continuous.</code><code class="descname">SPOT2D</code><span class="sig-paren">(</span><em>sigma=2.0</em>, <em>lr=0.01</em>, <em>beta1=0.9</em>, <em>beta2=0.999</em>, <em>decay=0.0</em>, <em>max_iter=300</em>, <em>tol=0.001</em>, <em>verbose=0</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.SPOT2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Single-Potential Optimal Transport 2D Transform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>alpha</strong> : float (default=0.01)</p>
+<blockquote>
+<div><p>Regularization of the curl operator.</p>
+</div></blockquote>
+<p><strong>lr</strong> : float (default=0.01)</p>
+<blockquote>
+<div><p>Learning rate.</p>
+</div></blockquote>
+<p><strong>beta1</strong> : float (default=0.9)</p>
+<blockquote>
+<div><p>Adam optimizer parameter. 0 &lt; beta1 &lt; 1. Generally close to 1.</p>
+</div></blockquote>
+<p><strong>beta2</strong> : float (default=0.999)</p>
+<blockquote>
+<div><p>Adam optimizer parameter. 0 &lt; beta2 &lt; 1. Generally close to 1.</p>
+</div></blockquote>
+<p><strong>decay</strong> : float (default=0.)</p>
+<blockquote>
+<div><p>Learning rate decay over each update.</p>
+</div></blockquote>
+<p><strong>max_iter</strong> : int (default=300)</p>
+<blockquote>
+<div><p>Maximum number of iterations.</p>
+</div></blockquote>
+<p><strong>tol</strong> : float (default=0.001)</p>
+<blockquote>
+<div><p>Stop iterating when change in cost function is below this threshold.</p>
+</div></blockquote>
+<p><strong>verbose</strong> : int (default=1)</p>
+<blockquote class="last">
+<div><p>Verbosity during optimization. 0=no output, 1=print cost,
+2=print all metrics.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<p>[Transport-based pattern theory: A signal transformation approach]
+(<a class="reference external" href="https://arxiv.org/abs/1802.07163">https://arxiv.org/abs/1802.07163</a>)
+[Adam - A method for stochastic optimization]
+(<a class="reference external" href="http://arxiv.org/abs/1412.6980v8">http://arxiv.org/abs/1412.6980v8</a>)</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="8%" />
+<col width="92%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a href="#id53"><span class="problematic" id="id54">displacements_</span></a></td>
+<td>(array, shape (2, height, width)) Displacements u. First index denotes direction: displacements_[0] is y-displacements, and displacements_[1] is x-displacements.</td>
+</tr>
+<tr class="row-even"><td><a href="#id55"><span class="problematic" id="id56">transport_map_</span></a></td>
+<td>(array, shape (2, height, width)) Transport map f. First index denotes direction: transport_map_[0] is y-map, and transport_map_[1] is x-map.</td>
+</tr>
+<tr class="row-odd"><td><a href="#id57"><span class="problematic" id="id58">cost_</span></a></td>
+<td>(list of float) Value of cost function at each iteration.</td>
+</tr>
+<tr class="row-even"><td><a href="#id59"><span class="problematic" id="id60">mse_</span></a></td>
+<td>(list of float) Mean squared error at each iteration.</td>
+</tr>
+<tr class="row-odd"><td><a href="#id61"><span class="problematic" id="id62">curl_</span></a></td>
+<td>(list of float) Curl at each iteration.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<dl class="method">
+<dt id="optrans.continuous.SPOT2D.apply_forward_potential">
+<code class="descname">apply_forward_potential</code><span class="sig-paren">(</span><em>potential</em>, <em>sig1</em>, <em>sigma</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.SPOT2D.apply_forward_potential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appy forward transport map derived from potential.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>potential</strong> : array, shape (height, width)</p>
+<blockquote>
+<div><p>Potential.</p>
+</div></blockquote>
+<p><strong>sig1</strong> : array, shape (height, width)</p>
+<blockquote>
+<div><p>Signal to transform.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sig0_recon</strong> : array, shape (height, width)</p>
+<blockquote class="last">
+<div><p>Reconstructed reference signal sig0.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.continuous.SPOT2D.apply_inverse_potential">
+<code class="descname">apply_inverse_potential</code><span class="sig-paren">(</span><em>potential</em>, <em>sig0</em>, <em>sigma</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.SPOT2D.apply_inverse_potential" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appy inverse transport map derived from potential.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>potential</strong> : array, shape (height, width)</p>
+<blockquote>
+<div><p>Potential. Inverse transport map is computed in this function.</p>
+</div></blockquote>
+<p><strong>sig0</strong> : array, shape (height, width)</p>
+<blockquote>
+<div><p>Reference signal.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sig1_recon</strong> : array, shape (height, width)</p>
+<blockquote class="last">
+<div><p>Reconstructed signal sig1.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.continuous.SPOT2D.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>sig0</em>, <em>sig1</em><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.SPOT2D.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Forward transform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>sig0</strong> : array, shape (height, width)</p>
+<blockquote>
+<div><p>Reference image.</p>
+</div></blockquote>
+<p><strong>sig1</strong> : array, shape (height, width)</p>
+<blockquote>
+<div><p>Signal to transform.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>lot</strong> : array, shape (2, height, width)</p>
+<blockquote class="last">
+<div><p>LOT transform of input image sig1. First index denotes direction:
+lot[0] is y-LOT, and lot[1] is x-LOT.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="optrans.continuous.SPOT2D.inverse">
+<code class="descname">inverse</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#optrans.continuous.SPOT2D.inverse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inverse transform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sig1_recon</strong> : array, shape (height, width)</p>
 <blockquote class="last">
 <div><p>Reconstructed signal sig1.</p>
 </div></blockquote>
